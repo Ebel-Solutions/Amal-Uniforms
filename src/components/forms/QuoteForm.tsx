@@ -4,6 +4,7 @@ import { useState } from "react";
 import { quoteFormSchema, type QuoteFormData } from "@/lib/validations";
 import {
   INDUSTRY_OPTIONS,
+  PRODUCTS_BY_INDUSTRY,
   PRODUCT_OPTIONS,
   TIMELINE_OPTIONS,
   QUANTITY_OPTIONS,
@@ -15,11 +16,24 @@ export default function QuoteForm() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
 
+  const availableProducts = formData.industry
+    ? PRODUCTS_BY_INDUSTRY[formData.industry as keyof typeof PRODUCTS_BY_INDUSTRY] || []
+    : PRODUCT_OPTIONS;
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    setFormData((prev) => {
+      const next = { ...prev, [name]: value };
+      if (name === "industry") {
+        const available = value ? PRODUCTS_BY_INDUSTRY[value as keyof typeof PRODUCTS_BY_INDUSTRY] || [] : [];
+        if (prev.products && !available.includes(prev.products)) {
+          next.products = "";
+        }
+      }
+      return next;
+    });
     // Clear error on change
     if (errors[name]) {
       setErrors((prev) => {
@@ -104,7 +118,7 @@ export default function QuoteForm() {
             value={formData.companyName || ""}
             onChange={handleChange}
             className={`input-field ${errors.companyName ? "!border-red-400" : ""}`}
-            placeholder="Your company name"
+            placeholder="e.g. Acme Corporation"
             aria-required="true"
             aria-invalid={!!errors.companyName}
           />
@@ -146,7 +160,7 @@ export default function QuoteForm() {
             value={formData.phone || ""}
             onChange={handleChange}
             className={`input-field ${errors.phone ? "!border-red-400" : ""}`}
-            placeholder="05XXXXXXXX"
+            placeholder="+966 5X XXX XXXX"
             aria-required="true"
             aria-invalid={!!errors.phone}
           />
@@ -165,7 +179,7 @@ export default function QuoteForm() {
             value={formData.email || ""}
             onChange={handleChange}
             className={`input-field ${errors.email ? "!border-red-400" : ""}`}
-            placeholder="you@company.com"
+            placeholder="name@company.com"
             aria-required="true"
             aria-invalid={!!errors.email}
           />
@@ -179,7 +193,7 @@ export default function QuoteForm() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         <div>
           <label htmlFor="industry" className="input-label">
-            Industry <span className="text-red-500">*</span>
+            Industry / Service <span className="text-red-500">*</span>
           </label>
           <select
             id="industry"
@@ -192,7 +206,7 @@ export default function QuoteForm() {
             aria-required="true"
             aria-invalid={!!errors.industry}
           >
-            <option value="">Select your industry</option>
+            <option value="">Select industry or service</option>
             {INDUSTRY_OPTIONS.map((opt) => (
               <option key={opt} value={opt}>
                 {opt}
@@ -218,9 +232,13 @@ export default function QuoteForm() {
             aria-required="true"
             aria-invalid={!!errors.products}
           >
-            <option value="">Select product category</option>
-            {PRODUCT_OPTIONS.map((opt) => (
-              <option key={opt} value={opt}>
+            <option value="">
+              {formData.industry
+                ? `Select ${formData.industry} category`
+                : "Select product category"}
+            </option>
+            {availableProducts.map((opt, idx) => (
+              <option key={`${opt}-${idx}`} value={opt}>
                 {opt}
               </option>
             ))}
