@@ -21,6 +21,13 @@ export interface BannerSlide {
   bgImage?: string;
 
   /**
+   * Path to a background IMAGE shown ONLY on mobile devices (relative to /public).
+   * Example: "/images/banner/mobile/slide-1.jpg"
+   * When set, this image replaces the bgVideo/bgImage on screens < 768 px.
+   */
+  bgImageMobile?: string;
+
+  /**
    * Path to a background VIDEO (relative to /public).
    * Example: "/images/vid.mp4"
    * Supported formats: mp4, webm.
@@ -38,6 +45,8 @@ export const bannerSlides: BannerSlide[] = [
     buttonText: "Shop Now",
     buttonLink: "/#products",
     bgVideo: "/images/banner_videos/suit.mp4",
+    // ↓ Replace with your actual mobile image path inside /public
+    bgImageMobile: "/images/banner/mobile/slide-1.png",
   },
   {
     id: 2,
@@ -46,6 +55,8 @@ export const bannerSlides: BannerSlide[] = [
     buttonText: "Explore Collection",
     buttonLink: "/#products",
     bgVideo: "/images/banner_videos/doctor.mp4",
+    // ↓ Replace with your actual mobile image path inside /public
+    bgImageMobile: "/images/banner/mobile/slide-2.png",
   },
   {
     id: 3,
@@ -54,5 +65,7 @@ export const bannerSlides: BannerSlide[] = [
     buttonText: "Get a Quote",
     buttonLink: "/contact#quote",
     bgVideo: "/images/banner_videos/engineer.mp4",
+    // ↓ Replace with your actual mobile image path inside /public
+    bgImageMobile: "/images/banner/mobile/slide-3.png",
   },
 ];

@@ -22,6 +22,11 @@ export interface TrustBadge {
 }
 
 export const healthcareData = {
+  // ── Theme ──────────────────────────────────────────────────────────────────
+  theme: {
+    ctaPrimaryBtn: "bg-teal-500 text-navy-950 hover:bg-teal-400 font-bold",
+  },
+
   // ── Hero Section ─────────────────────────────────────────────────────────────
   hero: {
     breadcrumbs: [

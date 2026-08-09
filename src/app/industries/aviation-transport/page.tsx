@@ -4,6 +4,7 @@ import { Metadata } from "next";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { aviationTransportData } from "@/data/aviation-transport";
+import ServiceCtaBanner from "@/components/sections/ServiceCtaBanner";
 import {
   ChevronRight,
   ArrowRight,
@@ -251,45 +252,11 @@ export default function AviationTransportIndustryPage() {
         </section>
 
         {/* ── 4. CTA Banner Section ───────────────────────────────────────────── */}
-        <section className="bg-navy-950 text-white relative overflow-hidden">
-          <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-stretch min-h-[220px]">
-            <div className="relative w-full lg:w-[42%] min-h-[220px] lg:min-h-0 shrink-0 overflow-hidden">
-              <Image
-                src={ctaBanner.bgImage}
-                alt="Aviation uniforms"
-                fill
-                className="object-cover object-center"
-                sizes="(max-width: 1024px) 100vw, 42vw"
-              />
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-navy-950/30 to-navy-950" />
-              <div className="absolute inset-0 bg-gradient-to-t from-navy-950/60 via-transparent to-transparent lg:hidden" />
-            </div>
-            <div className="flex-1 flex flex-col justify-center px-6 py-10 sm:px-10 lg:py-14 lg:pl-6 lg:pr-10 space-y-5">
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight leading-tight">
-                {ctaBanner.title}
-              </h2>
-              <p className="text-sm sm:text-base text-slate-300 leading-relaxed max-w-lg">
-                {ctaBanner.subtitle}
-              </p>
-              <div className="flex flex-wrap items-center gap-3 pt-1">
-                <Link
-                  href={ctaBanner.primaryBtn.href}
-                  className={`inline-flex items-center justify-center gap-2 px-6 py-3 ${theme.ctaPrimaryBtn} font-bold text-sm rounded-xl transition-colors shadow-md group`}
-                >
-                  <span>{ctaBanner.primaryBtn.text}</span>
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </Link>
-                <Link
-                  href={ctaBanner.secondaryBtn.href}
-                  className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-transparent text-white border border-white/40 font-medium text-sm rounded-xl hover:bg-white/10 transition-colors group"
-                >
-                  <span>{ctaBanner.secondaryBtn.text}</span>
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </Link>
-              </div>
-            </div>
-          </div>
-        </section>
+        <ServiceCtaBanner
+          ctaBanner={ctaBanner}
+          primaryBtnClass={theme.ctaPrimaryBtn}
+          imageAlt="Aviation uniforms"
+        />
 
         {/* ── 5. Bottom Trust Badges Bar ──────────────────────────────────────── */}
         <section className="bg-white py-8 border-t border-slate-200">

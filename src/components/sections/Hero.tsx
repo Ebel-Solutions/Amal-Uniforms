@@ -10,13 +10,19 @@ const IMAGE_SLIDE_INTERVAL = 2500;
 
 // ── Per-slide background ───────────────────────────────────────────────────────
 // Renders video for video slides, or image for image-only slides.
+// Duration (ms) for mobile image slides — should match mobileKenBurns CSS duration
+const MOBILE_SLIDE_INTERVAL = 5000;
+
 function SlideBackground({
   slide,
   isActive,
+  animationKey,
   onEnded,
 }: {
   slide: (typeof bannerSlides)[number];
   isActive: boolean;
+  /** Changes each time this slide becomes active — forces animation restart */
+  animationKey: number;
   onEnded: () => void;
 }) {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -39,36 +45,60 @@ function SlideBackground({
     };
   }, [isActive, onEnded]);
 
-  if (slide.bgVideo) {
-    return (
-      <video
-        ref={videoRef}
-        src={slide.bgVideo}
-        muted
-        playsInline
-        preload={isActive ? "auto" : "none"}
-        onEnded={onEnded}
-        className="banner-video absolute inset-0 w-full h-full object-cover object-center"
-        aria-hidden="true"
-      />
-    );
-  }
+  return (
+    <>
+      {/* ── Mobile image (shown only on screens < 768 px) ────────────────── */}
+      {slide.bgImageMobile && (
+        <div
+          key={`mob-${animationKey}`}
+          className={`block md:hidden absolute inset-0 overflow-hidden${
+            isActive ? " mobile-ken-burns" : ""
+          }`}
+        >
+          <Image
+            src={slide.bgImageMobile}
+            alt={slide.title}
+            fill
+            priority={isActive}
+            quality={80}
+            className="object-cover object-center"
+            sizes="100vw"
+          />
+        </div>
+      )}
 
-  if (slide.bgImage) {
-    return (
-      <Image
-        src={slide.bgImage}
-        alt={slide.title}
-        fill
-        priority={isActive}
-        quality={80}
-        className="object-cover object-center"
-        sizes="100vw"
-      />
-    );
-  }
+      {/* ── Desktop: video ────────────────────────────────────────────────── */}
+      {slide.bgVideo && (
+        <video
+          ref={videoRef}
+          src={slide.bgVideo}
+          muted
+          playsInline
+          preload={isActive ? "auto" : "none"}
+          onEnded={onEnded}
+          className={`banner-video absolute inset-0 w-full h-full object-cover object-center${
+            slide.bgImageMobile ? " hidden md:block" : ""
+          }`}
+          aria-hidden="true"
+        />
+      )}
 
-  return null;
+      {/* ── Desktop fallback: static image (no video, no mobile img) ──────── */}
+      {!slide.bgVideo && slide.bgImage && (
+        <Image
+          src={slide.bgImage}
+          alt={slide.title}
+          fill
+          priority={isActive}
+          quality={80}
+          className={`object-cover object-center${
+            slide.bgImageMobile ? " hidden md:block" : ""
+          }`}
+          sizes="100vw"
+        />
+      )}
+    </>
+  );
 }
 
 // ── Hero ───────────────────────────────────────────────────────────────────────
@@ -97,6 +127,19 @@ export default function Hero() {
     };
   }, [current, next]);
 
+  // Mobile auto-advance: when a slide has a mobile image (& a desktop video that
+  // is hidden on mobile), drive the timer from the Ken Burns duration so slides
+  // advance after the zoom animation completes.
+  const mobileTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  useEffect(() => {
+    const currentSlide = bannerSlides[current];
+    if (!currentSlide.bgImageMobile) return; // no mobile image — nothing to do
+    mobileTimerRef.current = setTimeout(next, MOBILE_SLIDE_INTERVAL);
+    return () => {
+      if (mobileTimerRef.current) clearTimeout(mobileTimerRef.current);
+    };
+  }, [current, next]);
+
   const slide = bannerSlides[current];
 
   return (
@@ -115,6 +158,7 @@ export default function Hero() {
           <SlideBackground
             slide={s}
             isActive={i === current}
+            animationKey={i === current ? current : -1}
             onEnded={next}
           />
           {/* Dark overlay */}

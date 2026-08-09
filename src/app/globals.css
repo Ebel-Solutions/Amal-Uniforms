@@ -337,7 +337,18 @@ body {
   }
 }
 
+/* Mobile banner: slow single zoom toward center — no intermediate stops */
+@keyframes mobileKenBurns {
+  from { transform: scale(1); }
+  to   { transform: scale(1.12); }
+}
 
+/* Applied to the <div> wrapping the mobile <Image> when the slide is active */
+.mobile-ken-burns {
+  animation: mobileKenBurns 5s ease-in-out forwards;
+  transform-origin: center center;
+  will-change: transform;
+}
 
 /* Subtitle — refined caps label */
 .banner-subtitle {
