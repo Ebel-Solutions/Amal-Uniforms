@@ -2,6 +2,7 @@
 
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
+import { useLanguage } from "@/lib/LanguageContext";
 
 // ─── Set this to your image or video filename in /public/ ─────────────────────
 //     e.g. HERO_IMAGE = "/images/contact-hero.jpg" or HERO_VIDEO = "/videos/contact-hero.mp4"
@@ -10,6 +11,8 @@ const HERO_IMAGE: string | null = "/images/contact.jpg";
 const HERO_VIDEO: string | null = null;
 
 export default function ContactHero() {
+  const { t, isRTL } = useLanguage();
+  const fontStyle = isRTL ? { fontFamily: "'Noto Sans Arabic', 'Segoe UI', sans-serif", textAlign: 'right' as const } : {};
   return (
     <section
       className="relative overflow-hidden"
@@ -89,8 +92,8 @@ export default function ContactHero() {
       <div className="container-custom relative" style={{ zIndex: 3 }}>
         <AnimatedSection className="text-center">
           {/* Heading */}
-          <h1 className="text-display text-white mb-6 max-w-3xl mx-auto">
-            We&rsquo;d Love to Hear{" "}
+          <h1 className="text-display text-white mb-6 max-w-3xl mx-auto" style={fontStyle}>
+            {t("contactPage.heroTitle")}{" "}
             <span
               style={{
                 background: "linear-gradient(135deg, #ffffff 0%, #C0C0C0 100%)",
@@ -99,16 +102,15 @@ export default function ContactHero() {
                 backgroundClip: "text",
               }}
             >
-              From You
+              {t("contactPage.heroTitleHighlight")}
             </span>
           </h1>
 
           {/* Decorative line */}
           <div className="gold-line-center mb-6" />
 
-          <p className="text-body-large text-white/60 max-w-2xl mx-auto mb-12">
-            Whether you need a quote, have a question about our services, or
-            want to visit our showroom — our team is ready to help.
+          <p className="text-body-large text-white/60 max-w-2xl mx-auto mb-12" style={fontStyle}>
+            {t("contactPage.heroDescription")}
           </p>
         </AnimatedSection>
 
@@ -116,10 +118,10 @@ export default function ContactHero() {
         <AnimatedSection delay={0.2}>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
             {[
-              { icon: <Clock size={20} />, label: "Response Time", value: "< 24 Hours" },
-              { icon: <Phone size={20} />, label: "Call Us", value: "057 242 9905" },
-              { icon: <Mail size={20} />, label: "Email Us", value: "Info@amaluniform.com" },
-              { icon: <MapPin size={20} />, label: "Location", value: "Riyadh, KSA" },
+              { icon: <Clock size={20} />, label: t("contact.responseTime"), value: t("contact.within24Hours") },
+              { icon: <Phone size={20} />, label: t("contact.phone"), value: "057 242 9905" },
+              { icon: <Mail size={20} />, label: t("contact.email"), value: "Info@amaluniform.com" },
+              { icon: <MapPin size={20} />, label: isRTL ? "الموقع" : "Location", value: isRTL ? "الرياض، المملكة" : "Riyadh, KSA" },
             ].map((item) => (
               <div
                 key={item.label}
@@ -128,8 +130,8 @@ export default function ContactHero() {
                 <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center mx-auto mb-3 text-gold-400">
                   {item.icon}
                 </div>
-                <div className="text-label text-white/40 mb-1">{item.label}</div>
-                <div className="text-sm font-medium text-white leading-tight">
+                <div className="text-label text-white/40 mb-1" style={fontStyle}>{item.label}</div>
+                <div className="text-sm font-medium text-white leading-tight" style={fontStyle}>
                   {item.value}
                 </div>
               </div>

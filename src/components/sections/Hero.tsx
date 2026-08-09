@@ -4,13 +4,12 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { bannerSlides } from "@/data/banner-slides";
+import { useLanguage } from "@/lib/LanguageContext";
 
 // Fallback duration (ms) used only for IMAGE slides — videos advance on `ended`
 const IMAGE_SLIDE_INTERVAL = 2500;
 
 // ── Per-slide background ───────────────────────────────────────────────────────
-// Renders video for video slides, or image for image-only slides.
-// Duration (ms) for mobile image slides — should match mobileKenBurns CSS duration
 const MOBILE_SLIDE_INTERVAL = 5000;
 
 function SlideBackground({
@@ -21,7 +20,6 @@ function SlideBackground({
 }: {
   slide: (typeof bannerSlides)[number];
   isActive: boolean;
-  /** Changes each time this slide becomes active — forces animation restart */
   animationKey: number;
   onEnded: () => void;
 }) {
@@ -47,7 +45,6 @@ function SlideBackground({
 
   return (
     <>
-      {/* ── Mobile image (shown only on screens < 768 px) ────────────────── */}
       {slide.bgImageMobile && (
         <div
           key={`mob-${animationKey}`}
@@ -67,7 +64,6 @@ function SlideBackground({
         </div>
       )}
 
-      {/* ── Desktop: video ────────────────────────────────────────────────── */}
       {slide.bgVideo && (
         <video
           ref={videoRef}
@@ -83,7 +79,6 @@ function SlideBackground({
         />
       )}
 
-      {/* ── Desktop fallback: static image (no video, no mobile img) ──────── */}
       {!slide.bgVideo && slide.bgImage && (
         <Image
           src={slide.bgImage}
@@ -101,11 +96,35 @@ function SlideBackground({
   );
 }
 
+// Translated content for each slide (keyed by slide id)
+const SLIDE_TRANSLATIONS: Record<number, { subtitle: { en: string; ar: string }; title: { en: string; ar: string }; buttonText: { en: string; ar: string } }> = {
+  1: {
+    subtitle: { en: "Corporate Uniform", ar: "الزي المؤسسي" },
+    title: { en: "The Visual Language of Business", ar: "لغة الأعمال البصرية" },
+    buttonText: { en: "Shop Now", ar: "تسوق الآن" },
+  },
+  2: {
+    subtitle: { en: "Healthcare Uniform", ar: "زي الرعاية الصحية" },
+    title: { en: "Dressed for Care, Built for Comfort", ar: "مصمم للرعاية، مبني للراحة" },
+    buttonText: { en: "Explore Collection", ar: "استعرض المجموعة" },
+  },
+  3: {
+    subtitle: { en: "Industrial Workwear", ar: "ملابس العمل الصناعية" },
+    title: { en: "Protection Meets Professionalism", ar: "الحماية تلتقي بالاحترافية" },
+    buttonText: { en: "Get a Quote", ar: "احصل على عرض سعر" },
+  },
+};
+
 // ── Hero ───────────────────────────────────────────────────────────────────────
 export default function Hero() {
   const [current, setCurrent] = useState(0);
   const total = bannerSlides.length;
   const imageTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const { language, isRTL } = useLanguage();
+
+  const fontStyle = isRTL
+    ? { fontFamily: "'Noto Sans Arabic', 'Segoe UI', sans-serif", textAlign: "right" as const }
+    : {};
 
   const goTo = useCallback(
     (index: number) => {
@@ -117,23 +136,19 @@ export default function Hero() {
   const next = useCallback(() => goTo(current + 1), [current, goTo]);
   const prev = useCallback(() => goTo(current - 1), [current, goTo]);
 
-  // For image-only slides, advance with timer. Videos advance on `onEnded`.
   useEffect(() => {
     const currentSlide = bannerSlides[current];
-    if (currentSlide.bgVideo) return; // video handles timing
+    if (currentSlide.bgVideo) return;
     imageTimerRef.current = setTimeout(next, IMAGE_SLIDE_INTERVAL);
     return () => {
       if (imageTimerRef.current) clearTimeout(imageTimerRef.current);
     };
   }, [current, next]);
 
-  // Mobile auto-advance: when a slide has a mobile image (& a desktop video that
-  // is hidden on mobile), drive the timer from the Ken Burns duration so slides
-  // advance after the zoom animation completes.
   const mobileTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   useEffect(() => {
     const currentSlide = bannerSlides[current];
-    if (!currentSlide.bgImageMobile) return; // no mobile image — nothing to do
+    if (!currentSlide.bgImageMobile) return;
     mobileTimerRef.current = setTimeout(next, MOBILE_SLIDE_INTERVAL);
     return () => {
       if (mobileTimerRef.current) clearTimeout(mobileTimerRef.current);
@@ -141,6 +156,15 @@ export default function Hero() {
   }, [current, next]);
 
   const slide = bannerSlides[current];
+  const slideTrans = SLIDE_TRANSLATIONS[slide.id] || {
+    subtitle: { en: slide.subtitle, ar: slide.subtitle },
+    title: { en: slide.title, ar: slide.title },
+    buttonText: { en: slide.buttonText, ar: slide.buttonText },
+  };
+
+  const displaySubtitle = slideTrans.subtitle[language] ?? slideTrans.subtitle.en;
+  const displayTitle = slideTrans.title[language] ?? slideTrans.title.en;
+  const displayButton = slideTrans.buttonText[language] ?? slideTrans.buttonText.en;
 
   return (
     <section
@@ -168,29 +192,29 @@ export default function Hero() {
 
       {/* ── Slide Content ────────────────────────────────────────────────────── */}
       <div className="relative z-20 flex flex-col items-center justify-end h-full text-center px-6 pb-28">
-        <h1
-          key={`title-${current}`}
-          className="banner-title"
-          style={{ animation: "bannerFadeUp 0.75s ease both" }}
-        >
-          {slide.title}
-        </h1>
-
         <p
           key={`sub-${current}`}
           className="banner-subtitle"
-          style={{ animation: "bannerFadeUp 0.65s 0.1s ease both" }}
+          style={{ ...fontStyle, animation: "bannerFadeUp 0.65s 0.1s ease both" }}
         >
-          {slide.subtitle}
+          {displaySubtitle}
         </p>
+
+        <h1
+          key={`title-${current}`}
+          className="banner-title"
+          style={{ ...fontStyle, animation: "bannerFadeUp 0.75s ease both" }}
+        >
+          {displayTitle}
+        </h1>
 
         <a
           key={`btn-${current}`}
           href={slide.buttonLink}
           className="banner-cta mt-6"
-          style={{ animation: "bannerFadeUp 0.75s 0.2s ease both" }}
+          style={{ ...fontStyle, animation: "bannerFadeUp 0.75s 0.2s ease both" }}
         >
-          {slide.buttonText}
+          {displayButton}
         </a>
       </div>
 

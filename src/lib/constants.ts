@@ -38,7 +38,7 @@ export const NAV_ITEMS: NavItem[] = [
   },
   {
     label: "Industries",
-    href: "/#industries",
+    href: "/industries",
     children: [
       { label: "Corporate", href: "/industries/corporate" },
       { label: "Healthcare", href: "/industries/healthcare" },

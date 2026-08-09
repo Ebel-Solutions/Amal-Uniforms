@@ -5,8 +5,12 @@ import SectionHeading from "@/components/ui/SectionHeading";
 import QuoteForm from "@/components/forms/QuoteForm";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
+import { useLanguage } from "@/lib/LanguageContext";
 
 export default function FinalCTA() {
+  const { t, isRTL } = useLanguage();
+  const fontStyle = isRTL ? { fontFamily: "'Noto Sans Arabic', 'Segoe UI', sans-serif", textAlign: 'right' as const } : {};
+
   return (
     <section
       id="quote"
@@ -15,9 +19,9 @@ export default function FinalCTA() {
     >
       <div className="container-custom">
         <SectionHeading
-          label="Get Started"
-          title="Request a Quote"
-          subtitle="Tell us about your uniform requirements and our team will prepare a competitive quote within 24 hours."
+          label={t("sections.finalCta.label")}
+          title={t("sections.finalCta.title")}
+          subtitle={t("sections.finalCta.subtitle")}
         />
 
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16">
@@ -36,8 +40,8 @@ export default function FinalCTA() {
               <div className="sticky top-28 space-y-8">
                 {/* Contact card */}
                 <div className="bg-navy-950 rounded-2xl p-7 lg:p-8 text-white">
-                  <h3 className="font-display text-xl font-semibold mb-6">
-                    Contact Information
+                  <h3 className="font-display text-xl font-semibold mb-6" style={fontStyle}>
+                    {t("contact.contactInfo")}
                   </h3>
 
                   <div className="space-y-5">
@@ -49,7 +53,7 @@ export default function FinalCTA() {
                         <Phone size={18} className="text-gold-400" />
                       </div>
                       <div>
-                        <div className="text-small text-white/50 mb-0.5">Phone</div>
+                        <div className="text-small text-white/50 mb-0.5" style={fontStyle}>{t("contact.phone")}</div>
                         <div className="text-sm font-medium group-hover:text-gold-400 transition-colors">
                           {BUSINESS.phone}
                         </div>
@@ -64,7 +68,7 @@ export default function FinalCTA() {
                         <Mail size={18} className="text-gold-400" />
                       </div>
                       <div>
-                        <div className="text-small text-white/50 mb-0.5">Email</div>
+                        <div className="text-small text-white/50 mb-0.5" style={fontStyle}>{t("contact.email")}</div>
                         <div className="text-sm font-medium group-hover:text-gold-400 transition-colors">
                           {BUSINESS.email}
                         </div>
@@ -81,7 +85,7 @@ export default function FinalCTA() {
                         <MapPin size={18} className="text-gold-400" />
                       </div>
                       <div>
-                        <div className="text-small text-white/50 mb-0.5">Address</div>
+                        <div className="text-small text-white/50 mb-0.5" style={fontStyle}>{t("contact.address")}</div>
                         <div className="text-sm text-white/80 group-hover/addr:text-white transition-colors">
                           {BUSINESS.address.street}
                           <br />
@@ -97,11 +101,11 @@ export default function FinalCTA() {
                         <Clock size={18} className="text-gold-400" />
                       </div>
                       <div>
-                        <div className="text-small text-white/50 mb-0.5">
-                          Response Time
+                        <div className="text-small text-white/50 mb-0.5" style={fontStyle}>
+                          {t("contact.responseTime")}
                         </div>
-                        <div className="text-sm text-white/80">
-                          Within 24 hours
+                        <div className="text-sm text-white/80" style={fontStyle}>
+                          {t("contact.within24Hours")}
                         </div>
                       </div>
                     </div>
@@ -110,25 +114,25 @@ export default function FinalCTA() {
 
                 {/* Quick note */}
                 <div className="bg-gold-50 rounded-xl p-6 border border-gold-200">
-                  <h4 className="font-medium text-navy-950 mb-2 text-sm">
-                    Why request a quote?
+                  <h4 className="font-medium text-navy-950 mb-2 text-sm" style={fontStyle}>
+                    {t("contact.whyRequestQuote")}
                   </h4>
                   <ul className="space-y-2 text-small text-charcoal-light/70">
-                    <li className="flex items-start gap-2">
+                    <li className="flex items-start gap-2" style={fontStyle}>
                       <span className="text-gold-600 mt-1">•</span>
-                      Competitive pricing for bulk orders
+                      {t("contact.competitivePricing")}
                     </li>
-                    <li className="flex items-start gap-2">
+                    <li className="flex items-start gap-2" style={fontStyle}>
                       <span className="text-gold-600 mt-1">•</span>
-                      Custom design consultation included
+                      {t("contact.customDesignConsultation")}
                     </li>
-                    <li className="flex items-start gap-2">
+                    <li className="flex items-start gap-2" style={fontStyle}>
                       <span className="text-gold-600 mt-1">•</span>
-                      Free fabric samples available
+                      {t("contact.freeFabricSamples")}
                     </li>
-                    <li className="flex items-start gap-2">
+                    <li className="flex items-start gap-2" style={fontStyle}>
                       <span className="text-gold-600 mt-1">•</span>
-                      No obligation — just information
+                      {t("contact.noObligation")}
                     </li>
                   </ul>
                 </div>

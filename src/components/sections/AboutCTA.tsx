@@ -4,8 +4,15 @@ import Image from "next/image";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import { BUSINESS } from "@/lib/constants";
 import { ArrowRight, Phone, Mail } from "lucide-react";
+import { useLanguage } from "@/lib/LanguageContext";
 
 export default function AboutCTA() {
+  const { t, isRTL } = useLanguage();
+
+  const fontStyle = isRTL
+    ? { fontFamily: "'Noto Sans Arabic', 'Segoe UI', sans-serif", textAlign: "right" as const }
+    : {};
+
   return (
     <section
       className="section-padding bg-navy-950 relative overflow-hidden"
@@ -37,20 +44,18 @@ export default function AboutCTA() {
       <div className="container-custom relative z-10">
         <AnimatedSection>
           <div className="max-w-3xl">
-            <span className="text-label text-gold-400 block mb-5">
-              Ready to Get Started?
+            <span className="text-label text-gold-400 block mb-5" style={fontStyle}>
+              {t("about.ctaLabel")}
             </span>
 
-            <h2 className="text-heading-1 text-white mb-6 leading-tight">
-              Partner with Saudi Arabia&rsquo;s Most Trusted Uniform Manufacturer
+            <h2 className="text-heading-1 text-white mb-6 leading-tight" style={fontStyle}>
+              {t("about.ctaTitle")}
             </h2>
 
             <div className="gold-line mb-8" />
 
-            <p className="text-body-large text-white/60 mb-10 max-w-2xl leading-relaxed">
-              Whether you need 50 uniforms or 50,000 — our team is ready to
-              bring your vision to life. Request a quote today and receive a
-              detailed response within 24 hours, at no obligation.
+            <p className="text-body-large text-white/60 mb-10 max-w-2xl leading-relaxed" style={fontStyle}>
+              {t("about.ctaSubtitle")}
             </p>
 
             <div className="flex flex-wrap gap-4 mb-12">
@@ -58,20 +63,23 @@ export default function AboutCTA() {
                 href="/contact#quote"
                 id="about-cta-quote"
                 className="btn btn-primary group gap-2.5 !px-8 !py-4"
+                style={fontStyle}
               >
-                Request a Quote
+                {t("about.getQuote")}
                 <ArrowRight
                   size={18}
                   className="transition-transform group-hover:translate-x-1"
+                  style={isRTL ? { transform: "rotate(180deg)" } : {}}
                 />
               </a>
               <a
                 href={BUSINESS.phoneHref}
                 id="about-cta-call"
                 className="btn btn-secondary gap-2.5 !px-8 !py-4"
+                style={fontStyle}
               >
                 <Phone size={18} />
-                Call Us Now
+                {t("about.callUsNow")}
               </a>
             </div>
 

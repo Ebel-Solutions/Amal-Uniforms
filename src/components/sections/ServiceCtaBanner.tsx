@@ -1,6 +1,9 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { useLanguage } from "@/lib/LanguageContext";
 
 interface CtaBannerData {
   bgImage: string;
@@ -21,6 +24,17 @@ export default function ServiceCtaBanner({
   primaryBtnClass,
   imageAlt = "Uniform image",
 }: ServiceCtaBannerProps) {
+  const { t, isRTL } = useLanguage();
+
+  const fontStyle = isRTL
+    ? { fontFamily: "'Noto Sans Arabic', 'Segoe UI', sans-serif", textAlign: "right" as const }
+    : {};
+
+  const primaryBtnText = isRTL ? t("common.requestQuote") : ctaBanner.primaryBtn.text;
+  const secondaryBtnText = isRTL
+    ? (ctaBanner.secondaryBtn.text.includes("Call") ? t("nav.callUs") : ctaBanner.secondaryBtn.text.includes("Contact") ? t("nav.contact") : t("common.learnMore"))
+    : ctaBanner.secondaryBtn.text;
+
   return (
     <section className="bg-navy-950 text-white relative overflow-hidden">
       {/* Mobile: image as full-section background */}
@@ -53,26 +67,34 @@ export default function ServiceCtaBanner({
 
         {/* Text & Buttons */}
         <div className="relative flex-1 flex flex-col justify-center px-6 py-12 sm:px-10 lg:py-14 lg:pl-10 lg:pr-10 space-y-5">
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight leading-tight">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight leading-tight" style={fontStyle}>
             {ctaBanner.title}
           </h2>
-          <p className="text-sm sm:text-base text-slate-300 leading-relaxed max-w-lg">
+          <p className="text-sm sm:text-base text-slate-300 leading-relaxed max-w-lg" style={fontStyle}>
             {ctaBanner.subtitle}
           </p>
           <div className="flex flex-wrap items-center gap-3 pt-1">
             <Link
               href={ctaBanner.primaryBtn.href}
               className={`inline-flex items-center justify-center gap-2 px-6 py-3 ${primaryBtnClass} font-bold text-sm rounded-xl transition-colors shadow-md group`}
+              style={fontStyle}
             >
-              <span>{ctaBanner.primaryBtn.text}</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              <span>{primaryBtnText}</span>
+              <ArrowRight
+                className="w-4 h-4 group-hover:translate-x-1 transition-transform"
+                style={isRTL ? { transform: "rotate(180deg)" } : {}}
+              />
             </Link>
             <Link
               href={ctaBanner.secondaryBtn.href}
               className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-transparent text-white border border-white/40 font-medium text-sm rounded-xl hover:bg-white/10 transition-colors group"
+              style={fontStyle}
             >
-              <span>{ctaBanner.secondaryBtn.text}</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              <span>{secondaryBtnText}</span>
+              <ArrowRight
+                className="w-4 h-4 group-hover:translate-x-1 transition-transform"
+                style={isRTL ? { transform: "rotate(180deg)" } : {}}
+              />
             </Link>
           </div>
         </div>

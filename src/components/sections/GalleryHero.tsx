@@ -2,6 +2,7 @@
 
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import { GALLERY_CATEGORIES } from "@/data/gallery";
+import { useLanguage } from "@/lib/LanguageContext";
 
 // ─── Set this to your image or video filename in /public/ ─────────────────────
 //     e.g. HERO_IMAGE = "/images/gallery-hero.jpg" or HERO_VIDEO = "/videos/gallery-hero.mp4"
@@ -10,6 +11,8 @@ const HERO_IMAGE: string | null = "/images/gallery-hero.jpg";
 const HERO_VIDEO: string | null = null;
 
 export default function GalleryHero() {
+  const { t, isRTL } = useLanguage();
+  const fontStyle = isRTL ? { fontFamily: "'Noto Sans Arabic', 'Segoe UI', sans-serif", textAlign: 'right' as const } : {};
   return (
     <section
       className="relative overflow-hidden"
@@ -89,8 +92,8 @@ export default function GalleryHero() {
 
       <div className="container-custom relative" style={{ zIndex: 3 }}>
         <AnimatedSection className="text-center">
-          <h1 className="text-display text-white mb-6 max-w-3xl mx-auto leading-tight">
-            Our Work,{" "}
+          <h1 className="text-display text-white mb-6 max-w-3xl mx-auto leading-tight" style={fontStyle}>
+            {t("galleryPage.heroTitle")}{" "}
             <span
               style={{
                 background: "linear-gradient(135deg, #ffffff 0%, #909090 100%)",
@@ -99,29 +102,37 @@ export default function GalleryHero() {
                 backgroundClip: "text",
               }}
             >
-              Up Close
+              {t("galleryPage.heroTitleHighlight")}
             </span>
           </h1>
 
           <div className="gold-line-center mb-6" />
 
-          <p className="text-body-large text-white/55 max-w-2xl mx-auto mb-10 leading-relaxed">
-            Browse our collection of professionally crafted uniforms, our Riyadh
-            showroom, and footwear options — all manufactured with precision for
-            Saudi Arabia&rsquo;s leading organisations.
+          <p className="text-body-large text-white/55 max-w-2xl mx-auto mb-10 leading-relaxed" style={fontStyle}>
+            {t("galleryPage.heroDescription")}
           </p>
 
           {/* Category pill strip */}
           <div className="flex flex-wrap justify-center gap-3">
-            {GALLERY_CATEGORIES.map((cat) => (
-              <a
-                key={cat.id}
-                href={`#${cat.id}`}
-                className="inline-flex items-center px-4 py-2 rounded-full bg-white/8 border border-white/12 text-white/70 text-sm hover:bg-white/15 hover:text-white hover:border-white/25 transition-all duration-250"
-              >
-                <span>{cat.label}</span>
-              </a>
-            ))}
+            {GALLERY_CATEGORIES.map((cat) => {
+              let label = cat.label;
+              if (isRTL) {
+                if (cat.id === "store") label = "المعرض والمتاجر";
+                else if (cat.id === "uniforms") label = "الزي الموحد";
+                else if (cat.id === "shoes") label = "الأحذية";
+                else if (cat.id === "embroidery") label = "التطريز";
+              }
+              return (
+                <a
+                  key={cat.id}
+                  href={`#${cat.id}`}
+                  className="inline-flex items-center px-4 py-2 rounded-full bg-white/8 border border-white/12 text-white/70 text-sm hover:bg-white/15 hover:text-white hover:border-white/25 transition-all duration-250"
+                  style={fontStyle}
+                >
+                  <span>{label}</span>
+                </a>
+              );
+            })}
           </div>
         </AnimatedSection>
       </div>

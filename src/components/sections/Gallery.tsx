@@ -6,24 +6,45 @@ import { StaggerContainer, StaggerItem } from "@/components/ui/AnimatedSection";
 import Image from "next/image";
 import { INDUSTRIES } from "@/lib/constants";
 import { X } from "lucide-react";
+import { useLanguage } from "@/lib/LanguageContext";
 
-const galleryItems = INDUSTRIES.slice(0, 6).map((industry, i) => ({
-  id: `gallery-${i}`,
-  title: `${industry.title} Uniforms`,
-  category: industry.title,
-  image: industry.image,
-}));
+const INDUSTRY_KEY_MAP: Record<string, string> = {
+  corporate: "industryCards.corporate.title",
+  healthcare: "industryCards.healthcare.title",
+  hospitality: "industryCards.hospitality.title",
+  industrial: "industryCards.industrial.title",
+  security: "industryCards.security.title",
+  education: "industryCards.education.title",
+  aviation: "industryCards.aviation.title",
+  retail: "industryCards.retail.title",
+  "facility-management": "industryCards.facilityManagement.title",
+  "sports-events": "industryCards.sportsEvents.title",
+  construction: "industryCards.construction.title",
+};
 
 export default function Gallery() {
-  const [selectedImage, setSelectedImage] = useState<typeof galleryItems[0] | null>(null);
+  const [selectedImage, setSelectedImage] = useState<{ id: string; title: string; category: string; image: string } | null>(null);
+  const { t, isRTL } = useLanguage();
+  const fontStyle = isRTL ? { fontFamily: "'Noto Sans Arabic', 'Segoe UI', sans-serif", textAlign: 'right' as const } : {};
+
+  const galleryItems = INDUSTRIES.slice(0, 6).map((industry, i) => ({
+    id: `gallery-${i}`,
+    title: `${INDUSTRY_KEY_MAP[industry.id] ? t(INDUSTRY_KEY_MAP[industry.id]) : industry.title} ${isRTL ? "— الزي الموحد" : "Uniforms"}`,
+    category: INDUSTRY_KEY_MAP[industry.id] ? t(INDUSTRY_KEY_MAP[industry.id]) : industry.title,
+    image: industry.image,
+  }));
 
   return (
-    <section id="gallery" className="section-padding bg-white" aria-label="Gallery">
+    <section
+      id="gallery"
+      className="section-padding bg-white"
+      aria-label="Gallery"
+    >
       <div className="container-custom">
         <SectionHeading
-          label="Gallery"
-          title="Our Work in Action"
-          subtitle="Browse our portfolio of professionally crafted uniforms delivered to businesses across Saudi Arabia."
+          label={t("sections.gallery.label")}
+          title={t("sections.gallery.title")}
+          subtitle={t("sections.gallery.subtitle")}
         />
 
         <StaggerContainer className="grid grid-cols-2 md:grid-cols-3 gap-4 lg:gap-5">
@@ -46,7 +67,7 @@ export default function Gallery() {
                 />
                 <div className="absolute inset-0 bg-navy-950/0 group-hover:bg-navy-950/40 transition-colors duration-300" />
                 <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                  <span className="text-small font-medium text-white">
+                  <span className="text-small font-medium text-white" style={fontStyle}>
                     {item.title}
                   </span>
                 </div>
@@ -68,7 +89,7 @@ export default function Gallery() {
           <button
             onClick={() => setSelectedImage(null)}
             className="absolute top-4 right-4 text-white/80 hover:text-white p-2 z-10"
-            aria-label="Close lightbox"
+            aria-label={t("common.close")}
           >
             <X size={28} />
           </button>
@@ -88,7 +109,7 @@ export default function Gallery() {
             className="absolute bottom-6 text-center"
             onClick={(e) => e.stopPropagation()}
           >
-            <p className="text-white text-lg font-display">
+            <p className="text-white text-lg font-display" style={fontStyle}>
               {selectedImage.title}
             </p>
           </div>

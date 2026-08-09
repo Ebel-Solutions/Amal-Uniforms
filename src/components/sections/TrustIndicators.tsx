@@ -1,8 +1,8 @@
 "use client";
 
-import { TRUST_STATS } from "@/lib/constants";
 import { motion, useInView } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
+import { useLanguage } from "@/lib/LanguageContext";
 
 function AnimatedCounter({
   value,
@@ -47,6 +47,14 @@ function AnimatedCounter({
 export default function TrustIndicators() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.5 });
+  const { t, isRTL } = useLanguage();
+
+  const stats = [
+    { value: 15, suffix: "+", label: t("trust.yearsExperience") },
+    { value: 12, suffix: "", label: t("trust.industriesServed") },
+    { value: 500, suffix: "+", label: t("trust.businessClients") },
+    { value: 100, suffix: "K+", label: t("trust.uniformsDelivered") },
+  ];
 
   return (
     <section className="relative bg-black" aria-label="Trust indicators">
@@ -59,7 +67,7 @@ export default function TrustIndicators() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          {TRUST_STATS.map((stat, index) => (
+          {stats.map((stat, index) => (
             <motion.div
               key={stat.label}
               className="text-center"
@@ -70,12 +78,17 @@ export default function TrustIndicators() {
             >
               <div className="font-display text-3xl lg:text-4xl xl:text-5xl font-bold text-gold-400 mb-2">
                 <AnimatedCounter
-                  value={stat.numericValue}
+                  value={stat.value}
                   suffix={stat.suffix}
                   inView={isInView}
                 />
               </div>
-              <div className="text-small text-white/50">{stat.label}</div>
+              <div
+                className="text-small text-white/50"
+                style={isRTL ? { fontFamily: "'Noto Sans Arabic', 'Segoe UI', sans-serif", textAlign: 'right' as const } : {}}
+              >
+                {stat.label}
+              </div>
             </motion.div>
           ))}
         </motion.div>

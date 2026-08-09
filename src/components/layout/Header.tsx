@@ -3,14 +3,29 @@
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { NAV_ITEMS, BUSINESS } from "@/lib/constants";
-import { Phone, ChevronDown, Menu } from "lucide-react";
+import { Phone, ChevronDown, Menu, Globe } from "lucide-react";
 import MobileNav from "./MobileNav";
+import { useLanguage } from "@/lib/LanguageContext";
+
+// Map of English nav labels → translation key path within translations.nav
+const NAV_LABEL_MAP: Record<string, string> = {
+  Home: "nav.home",
+  Industries: "nav.industries",
+  Printing: "nav.printing",
+  Embroidery: "nav.embroidery",
+  "Custom Manufacturing": "nav.customManufacturing",
+  Profession: "nav.profession",
+  Gallery: "nav.gallery",
+  About: "nav.about",
+  Contact: "nav.contact",
+};
 
 export default function Header() {
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const { t, toggleLanguage, language, isRTL } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -47,7 +62,7 @@ export default function Header() {
           className="flex lg:grid h-[72px] lg:h-20 w-full px-6 lg:px-10 justify-between lg:justify-normal items-center"
           style={{ gridTemplateColumns: "1fr auto 1fr" }}
         >
-          {/* Logo — extreme left */}
+          {/* Logo — extreme left (or right in RTL) */}
           <a href="/" className="flex items-center gap-2 justify-self-start self-center">
             <div className="flex flex-col">
               <span className="font-display text-xl lg:text-2xl font-bold tracking-tight text-white">
@@ -66,6 +81,9 @@ export default function Header() {
           >
             {NAV_ITEMS.map((item) => {
               const hasChildren = Boolean(item.children && item.children.length > 0);
+              const translatedLabel = NAV_LABEL_MAP[item.label]
+                ? t(NAV_LABEL_MAP[item.label])
+                : item.label;
               return (
                 <div
                   key={item.label}
@@ -76,8 +94,9 @@ export default function Header() {
                   <a
                     href={item.href}
                     className="flex items-center gap-1 px-2.5 xl:px-3 py-2 text-[13px] xl:text-[14px] font-medium text-white/90 hover:text-white hover:bg-white/10 rounded-md transition-colors duration-200 whitespace-nowrap"
+                    style={{ fontFamily: isRTL ? "'Noto Sans Arabic', 'Segoe UI', sans-serif" : undefined }}
                   >
-                    {item.label}
+                    {translatedLabel}
                     {hasChildren && (
                       <ChevronDown
                         size={13}
@@ -112,15 +131,19 @@ export default function Header() {
                             gap: "2px 14px",
                           }}
                         >
-                          {item.children!.map((child) => (
-                            <a
-                              key={child.label}
-                              href={child.href}
-                              className="flex items-center px-3 py-1.5 text-[13px] font-medium text-gray-800 hover:bg-black hover:text-white rounded-lg transition-colors whitespace-nowrap"
-                            >
-                              {child.label}
-                            </a>
-                          ))}
+                          {item.children!.map((child) => {
+                            const childTranslated = t(`subnav.${child.label}`);
+                            return (
+                              <a
+                                key={child.label}
+                                href={child.href}
+                                className="flex items-center px-3 py-1.5 text-[13px] font-medium text-gray-800 hover:bg-black hover:text-white rounded-lg transition-colors whitespace-nowrap"
+                                style={{ fontFamily: isRTL ? "'Noto Sans Arabic', 'Segoe UI', sans-serif" : undefined, textAlign: isRTL ? "right" : "left" }}
+                              >
+                                {childTranslated}
+                              </a>
+                            );
+                          })}
                         </div>
                       </div>
                     </div>
@@ -130,8 +153,24 @@ export default function Header() {
             })}
           </nav>
 
-          {/* Desktop CTA — extreme right */}
+          {/* Desktop CTA — extreme right (or left in RTL) */}
           <div className="hidden lg:flex items-center gap-3 justify-self-end self-center">
+            {/* Language Toggle Button */}
+            <button
+              onClick={toggleLanguage}
+              aria-label={language === "en" ? "Switch to Arabic" : "التبديل إلى الإنجليزية"}
+              title={language === "en" ? "Switch to Arabic" : "التبديل إلى الإنجليزية"}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-white/80 hover:text-white border border-white/20 hover:border-white/40 hover:bg-white/10 transition-all duration-200 text-[12px] font-medium"
+              style={{
+                fontFamily: language === "en"
+                  ? "'Noto Sans Arabic', 'Segoe UI', sans-serif"
+                  : undefined,
+              }}
+            >
+              <Globe size={13} />
+              <span>{language === "en" ? "عربي" : "English"}</span>
+            </button>
+
             <a
               href={BUSINESS.phoneHref}
               aria-label={`Call ${BUSINESS.phoneFormatted}`}
@@ -141,7 +180,7 @@ export default function Header() {
               <Phone size={16} />
             </a>
             <a href="/contact#quote" className="btn btn-primary !py-2 !px-5 !text-sm whitespace-nowrap">
-              Request Quote
+              {t("nav.requestQuote")}
             </a>
           </div>
 
@@ -150,6 +189,32 @@ export default function Header() {
             className="flex lg:hidden items-center gap-2"
             style={{ position: "relative", zIndex: 9001 }}
           >
+            {/* Mobile Language Toggle */}
+            <button
+              onClick={toggleLanguage}
+              aria-label={language === "en" ? "Switch to Arabic" : "التبديل إلى الإنجليزية"}
+              style={{
+                padding: "6px 10px",
+                borderRadius: "20px",
+                border: "1px solid rgba(255,255,255,0.2)",
+                background: "none",
+                color: "rgba(255,255,255,0.85)",
+                fontSize: "11px",
+                fontWeight: 600,
+                cursor: "pointer",
+                display: "flex",
+                alignItems: "center",
+                gap: "4px",
+                fontFamily:
+                  language === "en"
+                    ? "'Noto Sans Arabic', 'Segoe UI', sans-serif"
+                    : undefined,
+              }}
+            >
+              <Globe size={12} />
+              {language === "en" ? "عربي" : "EN"}
+            </button>
+
             <a
               href={BUSINESS.phoneHref}
               aria-label={`Call ${BUSINESS.phoneFormatted}`}

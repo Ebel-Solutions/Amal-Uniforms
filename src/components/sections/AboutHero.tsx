@@ -1,7 +1,7 @@
 "use client";
 
 import AnimatedSection from "@/components/ui/AnimatedSection";
-import { BUSINESS } from "@/lib/constants";
+import { useLanguage } from "@/lib/LanguageContext";
 
 // ─── Set this to your image or video filename in /public/ ─────────────────────
 //     e.g. HERO_IMAGE = "/images/contact-hero.jpg" or HERO_VIDEO = "/videos/contact-hero.mp4"
@@ -10,6 +10,8 @@ const HERO_IMAGE: string | null = "/images/about-hero.jpg";
 const HERO_VIDEO: string | null = null;
 
 export default function AboutHero() {
+  const { t, isRTL } = useLanguage();
+  const fontStyle = isRTL ? { fontFamily: "'Noto Sans Arabic', 'Segoe UI', sans-serif", textAlign: 'right' as const } : {};
   return (
     <section
       className="relative overflow-hidden"
@@ -87,8 +89,8 @@ export default function AboutHero() {
       <div className="container-custom relative" style={{ zIndex: 3 }}>
         <div className="max-w-3xl mx-auto text-center">
           <AnimatedSection>
-            <h1 className="text-display text-white mb-6 leading-tight">
-              Crafting Saudi Arabia&rsquo;s{" "}
+            <h1 className="text-display text-white mb-6 leading-tight" style={fontStyle}>
+              {t("about.heroTitle")}{" "}
               <span
                 style={{
                   background: "linear-gradient(135deg, #ffffff 0%, #A0A0A0 100%)",
@@ -97,19 +99,17 @@ export default function AboutHero() {
                   backgroundClip: "text",
                 }}
               >
-                Finest Uniforms
+                {t("about.heroTitleHighlight")}
               </span>
             </h1>
 
             <div className="gold-line-center mb-7" />
 
-            <p className="text-body-large text-white/60 leading-relaxed max-w-2xl mx-auto mb-4">
-              {BUSINESS.description}
+            <p className="text-body-large text-white/60 leading-relaxed max-w-2xl mx-auto mb-4" style={fontStyle}>
+              {t("about.heroDescription")}
             </p>
-            <p className="text-body text-white/40 max-w-xl mx-auto">
-              Founded on a commitment to quality, precision, and pride — Amal
-              Uniforms has been dressing Saudi Arabia&rsquo;s finest organisations
-              for over 15 years.
+            <p className="text-body text-white/40 max-w-xl mx-auto" style={fontStyle}>
+              {t("about.heroSubDescription")}
             </p>
           </AnimatedSection>
         </div>

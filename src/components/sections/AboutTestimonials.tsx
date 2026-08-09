@@ -2,8 +2,8 @@
 
 import SectionHeading from "@/components/ui/SectionHeading";
 import { StaggerContainer, StaggerItem } from "@/components/ui/AnimatedSection";
-import { TESTIMONIALS } from "@/lib/constants";
 import { Quote } from "lucide-react";
+import { useLanguage } from "@/lib/LanguageContext";
 
 // Star renderer
 function Stars({ count = 5 }: { count?: number }) {
@@ -27,6 +27,36 @@ function Stars({ count = 5 }: { count?: number }) {
 }
 
 export default function AboutTestimonials() {
+  const { t, isRTL } = useLanguage();
+
+  const fontStyle = isRTL
+    ? { fontFamily: "'Noto Sans Arabic', 'Segoe UI', sans-serif", textAlign: "right" as const }
+    : {};
+
+  const testimonials = [
+    {
+      id: "t1",
+      name: t("testimonials.t1.name"),
+      role: t("testimonials.t1.role"),
+      company: t("testimonials.t1.company"),
+      text: t("testimonials.t1.text"),
+    },
+    {
+      id: "t2",
+      name: t("testimonials.t2.name"),
+      role: t("testimonials.t2.role"),
+      company: t("testimonials.t2.company"),
+      text: t("testimonials.t2.text"),
+    },
+    {
+      id: "t3",
+      name: t("testimonials.t3.name"),
+      role: t("testimonials.t3.role"),
+      company: t("testimonials.t3.company"),
+      text: t("testimonials.t3.text"),
+    },
+  ];
+
   return (
     <section
       id="testimonials"
@@ -35,14 +65,14 @@ export default function AboutTestimonials() {
     >
       <div className="container-custom">
         <SectionHeading
-          label="Client Stories"
-          title="Trusted Across the Kingdom"
-          subtitle="Our uniforms speak for themselves — but we'll let our clients tell the story."
+          label={t("about.testimonialsLabel")}
+          title={t("about.testimonialsTitle")}
+          subtitle={t("about.testimonialsSubtitle")}
         />
 
         <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
-          {TESTIMONIALS.map((t) => (
-            <StaggerItem key={t.id}>
+          {testimonials.map((testimonial) => (
+            <StaggerItem key={testimonial.id}>
               <article className="flex flex-col h-full bg-warm-50 border border-warm-200 rounded-2xl p-7 lg:p-8 hover:shadow-[var(--shadow-card-hover)] hover:-translate-y-1 transition-all duration-350">
                 {/* Top row */}
                 <div className="flex items-start justify-between gap-3 mb-5">
@@ -53,22 +83,21 @@ export default function AboutTestimonials() {
                 </div>
 
                 {/* Quote */}
-                <blockquote className="flex-1 text-body text-charcoal-light/75 leading-relaxed italic mb-6">
-                  &ldquo;{t.text}&rdquo;
+                <blockquote className="flex-1 text-body text-charcoal-light/75 leading-relaxed italic mb-6" style={fontStyle}>
+                  &ldquo;{testimonial.text}&rdquo;
                 </blockquote>
 
                 {/* Author */}
                 <footer className="pt-5 border-t border-warm-200 flex items-center gap-3">
-                  {/* Avatar placeholder with initials */}
                   <div className="w-10 h-10 rounded-full bg-navy-950 text-white text-sm font-bold flex items-center justify-center shrink-0 font-display">
-                    {t.name.charAt(0)}
+                    {testimonial.name.charAt(0)}
                   </div>
                   <div>
-                    <div className="font-semibold text-navy-950 text-sm leading-tight">
-                      {t.name}
+                    <div className="font-semibold text-navy-950 text-sm leading-tight" style={fontStyle}>
+                      {testimonial.name}
                     </div>
-                    <div className="text-xs text-charcoal-light/55 mt-0.5">
-                      {t.role} · {t.company}
+                    <div className="text-xs text-charcoal-light/55 mt-0.5" style={fontStyle}>
+                      {testimonial.role} · {testimonial.company}
                     </div>
                   </div>
                 </footer>

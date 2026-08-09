@@ -3,16 +3,23 @@
 import Image from "next/image";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import { CheckCircle2 } from "lucide-react";
-
-const STORY_HIGHLIGHTS = [
-  "Founded in Riyadh with a single sewing machine and a vision",
-  "Grew to serve 500+ businesses across the Kingdom",
-  "Expanded into 12 industries including healthcare, aviation, and hospitality",
-  "Invested in industrial-grade equipment for large-scale precision manufacturing",
-  "Trusted by government entities, hospitals, hotels, and Fortune-500 companies",
-];
+import { useLanguage } from "@/lib/LanguageContext";
 
 export default function AboutStory() {
+  const { t, isRTL } = useLanguage();
+
+  const fontStyle = isRTL
+    ? { fontFamily: "'Noto Sans Arabic', 'Segoe UI', sans-serif", textAlign: "right" as const }
+    : {};
+
+  const highlights = [
+    isRTL ? "تأسست في الرياض بآلة خياطة واحدة ورؤية واثقة" : "Founded in Riyadh with a single sewing machine and a vision",
+    isRTL ? "نمت لتخدم أكثر من 500 شركة في جميع أنحاء المملكة" : "Grew to serve 500+ businesses across the Kingdom",
+    isRTL ? "توسعت في 12 قطاعاً شاملاً الرعاية الصحية والطيارين والضيافة" : "Expanded into 12 industries including healthcare, aviation, and hospitality",
+    isRTL ? "استثمرت في معدات فائقة التطور للتصنيع عالي الدقة بالجملة" : "Invested in industrial-grade equipment for large-scale precision manufacturing",
+    isRTL ? "محط ثقة الجهات الحكومية والمستشفيات والفنادق وكبرى الشركات" : "Trusted by government entities, hospitals, hotels, and Fortune-500 companies",
+  ];
+
   return (
     <section
       id="our-story"
@@ -38,8 +45,8 @@ export default function AboutStory() {
               {/* Floating badge */}
               <div className="absolute bottom-6 left-6 bg-black/80 backdrop-blur-sm border border-white/10 text-white rounded-2xl px-5 py-4">
                 <div className="font-display text-3xl font-bold text-white">15+</div>
-                <div className="text-xs uppercase tracking-widest text-white/50 mt-0.5">
-                  Years of Craftsmanship
+                <div className="text-xs uppercase tracking-widest text-white/50 mt-0.5" style={fontStyle}>
+                  {isRTL ? "عاماً من الحرفية" : "Years of Craftsmanship"}
                 </div>
               </div>
             </div>
@@ -52,43 +59,29 @@ export default function AboutStory() {
           {/* ── Text column ── */}
           <div className="space-y-8">
             <AnimatedSection direction="right">
-              <span className="text-label text-gold-600 block mb-4">Who We Are</span>
-              <h2 className="text-heading-1 text-navy-950 mb-6">
-                A Legacy Built on Quality & Precision
+              <span className="text-label text-gold-600 block mb-4" style={fontStyle}>
+                {t("about.storySubtitle")}
+              </span>
+              <h2 className="text-heading-1 text-navy-950 mb-6" style={fontStyle}>
+                {t("about.storyTitle")}
               </h2>
               <div className="gold-line mb-8" />
               <div className="space-y-4 text-body text-charcoal-light/75 leading-relaxed">
-                <p>
-                  Amal Uniforms began as a small tailoring atelier in the heart of
-                  Riyadh, built on a simple belief: that every professional
-                  deserves a uniform they are proud to wear. Over 15 years, that
-                  belief has shaped everything we do.
-                </p>
-                <p>
-                  Today we operate a full-scale manufacturing facility on{" "}
-                  <strong className="text-navy-950 font-medium">
-                    Malik Faisal Bin Abdul Aziz Street, Al Dheera
-                  </strong>
-                  , serving organisations across Saudi Arabia — from hospitals and
-                  hotels to airlines and government entities.
-                </p>
-                <p>
-                  Our team of experienced designers, pattern-makers, and tailors
-                  work with industrial-grade precision while preserving the
-                  artisanal care that sets our garments apart.
-                </p>
+                <p style={fontStyle}>{t("about.storyP1")}</p>
+                <p style={fontStyle}>{t("about.storyP2")}</p>
+                <p style={fontStyle}>{t("about.storyP3")}</p>
               </div>
             </AnimatedSection>
 
             <AnimatedSection direction="right" delay={0.15}>
               <ul className="space-y-3">
-                {STORY_HIGHLIGHTS.map((item) => (
+                {highlights.map((item) => (
                   <li key={item} className="flex items-start gap-3">
                     <CheckCircle2
                       size={20}
                       className="text-navy-950 mt-0.5 shrink-0"
                     />
-                    <span className="text-sm text-charcoal-light/70">{item}</span>
+                    <span className="text-sm text-charcoal-light/70" style={fontStyle}>{item}</span>
                   </li>
                 ))}
               </ul>

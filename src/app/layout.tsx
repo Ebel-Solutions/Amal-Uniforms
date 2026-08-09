@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Playfair_Display, Inter } from "next/font/google";
 import "./globals.css";
 import { BUSINESS } from "@/lib/constants";
+import { LanguageProvider } from "@/lib/LanguageContext";
 
 const playfairDisplay = Playfair_Display({
   variable: "--font-display",
@@ -119,9 +120,16 @@ export default function RootLayout({
         {/* DNS prefetch for Google Fonts to reduce font load time */}
         <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {/* Noto Sans Arabic — loaded for Arabic language support */}
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;500;600;700&display=swap"
+        />
       </head>
       <body className="min-h-full flex flex-col antialiased">
-        {children}
+        <LanguageProvider>
+          {children}
+        </LanguageProvider>
       </body>
     </html>
   );

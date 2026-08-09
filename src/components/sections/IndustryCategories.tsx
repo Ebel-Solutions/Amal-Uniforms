@@ -4,14 +4,33 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import { industryCategories } from "@/data/industry-categories";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useLanguage } from "@/lib/LanguageContext";
 
 const SLIDE_INTERVAL = 2500; // ms between auto-slides
+
+const INDUSTRY_KEY_MAP: Record<string, string> = {
+  corporate: "industryCards.corporate",
+  healthcare: "industryCards.healthcare",
+  hospitality: "industryCards.hospitality",
+  industrial: "industryCards.industrial",
+  security: "industryCards.security",
+  education: "industryCards.education",
+  aviation: "industryCards.aviation",
+  retail: "industryCards.retail",
+  "retail-commercial": "industryCards.retail",
+  spa: "industryCards.hospitality",
+  "facility-management": "industryCards.facilityManagement",
+  "sports-events": "industryCards.sportsEvents",
+  construction: "industryCards.construction",
+};
 
 export default function IndustryCategories() {
   const total = industryCategories.length;
   const [current, setCurrent] = useState(0);
   const trackRef = useRef<HTMLDivElement>(null);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const { t, isRTL } = useLanguage();
+  const fontStyle = isRTL ? { fontFamily: "'Noto Sans Arabic', 'Segoe UI', sans-serif", textAlign: 'right' as const } : {};
 
   // ── Scroll track to the card at `index` using its real offsetLeft ──────────
   const scrollToCard = useCallback((index: number) => {
@@ -57,8 +76,8 @@ export default function IndustryCategories() {
       {/* ── Header ─────────────────────────────────────────────────────── */}
       <div className="industry-slider-header">
         <div className="industry-slider-header__text">
-          <span className="industry-slider-label">Industries</span>
-          <h2 className="industry-slider-title">Uniforms for Every Sector</h2>
+          <span className="industry-slider-label" style={fontStyle}>{t("nav.industries")}</span>
+          <h2 className="industry-slider-title" style={fontStyle}>{t("sections.industries.title")}</h2>
         </div>
 
         {/* Arrow controls */}
@@ -80,7 +99,7 @@ export default function IndustryCategories() {
               key={industry.id}
               href={industry.href ?? "/#quote"}
               className="industry-card"
-              aria-label={`${industry.title} uniforms`}
+              aria-label={`${INDUSTRY_KEY_MAP[industry.id] ? t(INDUSTRY_KEY_MAP[industry.id] + ".title") : industry.title} uniforms`}
             >
               {/* Image */}
               <Image
@@ -97,8 +116,12 @@ export default function IndustryCategories() {
 
               {/* Text */}
               <div className="industry-card__content">
-                <h3 className="industry-card__title">{industry.title}</h3>
-                <p className="industry-card__desc">{industry.description}</p>
+                <h3 className="industry-card__title" style={fontStyle}>
+                  {INDUSTRY_KEY_MAP[industry.id] ? t(INDUSTRY_KEY_MAP[industry.id] + ".title") : industry.title}
+                </h3>
+                <p className="industry-card__desc" style={fontStyle}>
+                  {INDUSTRY_KEY_MAP[industry.id] ? t(INDUSTRY_KEY_MAP[industry.id] + ".description") : industry.description}
+                </p>
               </div>
             </a>
           ))}

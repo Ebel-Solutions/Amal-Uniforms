@@ -12,57 +12,58 @@ import {
   MessageSquare,
   ExternalLink,
 } from "lucide-react";
-
-// ─── Contact Information cards ───────────────────────────────────────────────
-
-const CONTACT_ITEMS = [
-  {
-    id: "phone",
-    icon: <Phone size={20} />,
-    label: "Phone",
-    primary: BUSINESS.phoneFormatted,
-    secondary: "Sun – Thu, 8:00 AM – 6:00 PM",
-    href: BUSINESS.phoneHref,
-  },
-  {
-    id: "email",
-    icon: <Mail size={20} />,
-    label: "Email",
-    primary: BUSINESS.email,
-    secondary: "We reply within 24 hours",
-    href: BUSINESS.emailHref,
-  },
-  {
-    id: "address",
-    icon: <MapPin size={20} />,
-    label: "Showroom",
-    primary: BUSINESS.address.street,
-    secondary: `${BUSINESS.address.area}, ${BUSINESS.address.city}`,
-    href: BUSINESS.mapsUrl,
-  },
-  {
-    id: "hours",
-    icon: <Clock size={20} />,
-    label: "Working Hours",
-    primary: "Sunday – Thursday",
-    secondary: "8:00 AM – 6:00 PM AST",
-    href: null,
-  },
-] as const;
-
-// ─── Why Contact section items ─────────────────────────────────────────────
-
-const REASONS = [
-  "Competitive pricing tailored to your order size",
-  "Custom design consultation at no extra charge",
-  "Free fabric samples before production",
-  "Dedicated account manager from day one",
-  "No obligation — just a comprehensive quote",
-];
-
-// ─── Component ────────────────────────────────────────────────────────────────
+import { useLanguage } from "@/lib/LanguageContext";
 
 export default function ContactMain() {
+  const { t, isRTL } = useLanguage();
+
+  const fontStyle = isRTL
+    ? { fontFamily: "'Noto Sans Arabic', 'Segoe UI', sans-serif", textAlign: "right" as const }
+    : {};
+
+  const contactItems = [
+    {
+      id: "phone",
+      icon: <Phone size={20} />,
+      label: t("contact.phone"),
+      primary: BUSINESS.phoneFormatted,
+      secondary: isRTL ? "الأحد – الخميس، 8:00 صباحاً – 6:00 مساءً" : "Sun – Thu, 8:00 AM – 6:00 PM",
+      href: BUSINESS.phoneHref,
+    },
+    {
+      id: "email",
+      icon: <Mail size={20} />,
+      label: t("contact.email"),
+      primary: BUSINESS.email,
+      secondary: t("contact.replyTime"),
+      href: BUSINESS.emailHref,
+    },
+    {
+      id: "address",
+      icon: <MapPin size={20} />,
+      label: t("contact.showroom"),
+      primary: BUSINESS.address.street,
+      secondary: `${BUSINESS.address.area}, ${BUSINESS.address.city}`,
+      href: BUSINESS.mapsUrl,
+    },
+    {
+      id: "hours",
+      icon: <Clock size={20} />,
+      label: t("contact.workingHours"),
+      primary: t("contact.workingDays"),
+      secondary: t("contact.workingTime"),
+      href: null,
+    },
+  ];
+
+  const reasons = [
+    t("contact.competitivePricing"),
+    t("contact.customDesignConsultation"),
+    t("contact.freeFabricSamples"),
+    isRTL ? "مدير حساب مخصص من اليوم الأول" : "Dedicated account manager from day one",
+    t("contact.noObligation"),
+  ];
+
   return (
     <>
       {/* ── Section 1: Request a Quote + Contact Info ─────────────────────── */}
@@ -73,9 +74,9 @@ export default function ContactMain() {
       >
         <div className="container-custom">
           <SectionHeading
-            label="Get Started"
-            title="Request a Quote"
-            subtitle="Fill out the form and our team will prepare a competitive quote within 24 hours — no obligation."
+            label={t("sections.finalCta.label")}
+            title={t("sections.finalCta.title")}
+            subtitle={t("contact.fillOutForm")}
           />
 
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16">
@@ -94,28 +95,28 @@ export default function ContactMain() {
                 <div className="sticky top-28 space-y-6">
                   {/* Contact info card */}
                   <div className="bg-navy-950 rounded-2xl p-7 lg:p-8 text-white">
-                    <h2 className="font-display text-xl font-semibold mb-1">
-                      Contact Information
+                    <h2 className="font-display text-xl font-semibold mb-1" style={fontStyle}>
+                      {t("contact.contactInfo")}
                     </h2>
-                    <p className="text-sm text-white/50 mb-6">
-                      Prefer to reach us directly? Here&apos;s how.
+                    <p className="text-sm text-white/50 mb-6" style={fontStyle}>
+                      {isRTL ? "تفضل التواصل معنا مباشرة؟ إليك الطرق." : "Prefer to reach us directly? Here's how."}
                     </p>
 
                     <div className="space-y-5">
-                      {CONTACT_ITEMS.map((item) => {
+                      {contactItems.map((item) => {
                         const Inner = (
                           <>
                             <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center shrink-0 transition-colors group-hover:bg-gold-500/20">
                               <span className="text-gold-400">{item.icon}</span>
                             </div>
                             <div className="min-w-0">
-                              <div className="text-[11px] uppercase tracking-widest text-white/40 mb-0.5 font-medium">
+                              <div className="text-[11px] uppercase tracking-widest text-white/40 mb-0.5 font-medium" style={fontStyle}>
                                 {item.label}
                               </div>
-                              <div className="text-sm font-medium text-white truncate transition-colors group-hover:text-gold-400">
+                              <div className="text-sm font-medium text-white truncate transition-colors group-hover:text-gold-400" style={fontStyle}>
                                 {item.primary}
                               </div>
-                              <div className="text-xs text-white/50 mt-0.5">
+                              <div className="text-xs text-white/50 mt-0.5" style={fontStyle}>
                                 {item.secondary}
                               </div>
                             </div>
@@ -155,12 +156,12 @@ export default function ContactMain() {
                       <div className="w-8 h-8 rounded-lg bg-navy-950 flex items-center justify-center">
                         <MessageSquare size={15} className="text-gold-400" />
                       </div>
-                      <h3 className="font-medium text-navy-950 text-sm">
-                        Why request a quote?
+                      <h3 className="font-medium text-navy-950 text-sm" style={fontStyle}>
+                        {t("contact.whyRequestQuote")}
                       </h3>
                     </div>
                     <ul className="space-y-2.5">
-                      {REASONS.map((reason) => (
+                      {reasons.map((reason) => (
                         <li key={reason} className="flex items-start gap-2.5">
                           <span
                             className="mt-1.5 w-4 h-4 rounded-full bg-navy-950 flex items-center justify-center shrink-0"
@@ -168,7 +169,7 @@ export default function ContactMain() {
                           >
                             <span className="block w-1.5 h-1.5 rounded-full bg-gold-400" />
                           </span>
-                          <span className="text-sm text-charcoal-light/70">
+                          <span className="text-sm text-charcoal-light/70" style={fontStyle}>
                             {reason}
                           </span>
                         </li>
@@ -190,9 +191,9 @@ export default function ContactMain() {
       >
         <div className="container-custom">
           <SectionHeading
-            label="Find Us"
-            title="Visit Our Showroom"
-            subtitle="Come see our fabric samples, meet the team, and discuss your requirements in person at our Riyadh showroom."
+            label={isRTL ? "موقعنا" : "Find Us"}
+            title={isRTL ? "تفضل بزيارة معرضنا" : "Visit Our Showroom"}
+            subtitle={isRTL ? "تعال لمشاهدة عينات الأقمشة والالتقاء بالفريق ومناقشة متطلباتك شخصياً في معرضنا بالرياض." : "Come see our fabric samples, meet the team, and discuss your requirements in person at our Riyadh showroom."}
           />
 
           <AnimatedSection>
@@ -200,17 +201,17 @@ export default function ContactMain() {
               {/* Info panel */}
               <div className="lg:col-span-2 bg-navy-950 text-white p-8 lg:p-10 flex flex-col justify-between gap-8">
                 <div>
-                  <div className="text-label text-gold-400 mb-4">
-                    Showroom Address
+                  <div className="text-label text-gold-400 mb-4" style={fontStyle}>
+                    {isRTL ? "عنوان المعرض" : "Showroom Address"}
                   </div>
                   <address className="not-italic space-y-2 mb-6">
-                    <p className="text-lg font-display font-semibold leading-snug">
+                    <p className="text-lg font-display font-semibold leading-snug" style={fontStyle}>
                       {BUSINESS.address.street}
                     </p>
-                    <p className="text-white/60 text-sm">
+                    <p className="text-white/60 text-sm" style={fontStyle}>
                       {BUSINESS.address.area}, {BUSINESS.address.city}
                     </p>
-                    <p className="text-white/60 text-sm">
+                    <p className="text-white/60 text-sm" style={fontStyle}>
                       {BUSINESS.address.country}
                     </p>
                   </address>
@@ -220,20 +221,20 @@ export default function ContactMain() {
 
                   <div className="space-y-5">
                     <div>
-                      <div className="text-[11px] uppercase tracking-widest text-white/40 mb-1 font-medium">
-                        Working Hours
+                      <div className="text-[11px] uppercase tracking-widest text-white/40 mb-1 font-medium" style={fontStyle}>
+                        {t("contact.workingHours")}
                       </div>
-                      <div className="text-sm text-white font-medium">
-                        Sunday – Thursday
+                      <div className="text-sm text-white font-medium" style={fontStyle}>
+                        {t("contact.workingDays")}
                       </div>
-                      <div className="text-sm text-white/60">
-                        8:00 AM – 6:00 PM (AST)
+                      <div className="text-sm text-white/60" style={fontStyle}>
+                        {t("contact.workingTime")}
                       </div>
                     </div>
 
                     <div>
-                      <div className="text-[11px] uppercase tracking-widest text-white/40 mb-1 font-medium">
-                        Phone
+                      <div className="text-[11px] uppercase tracking-widest text-white/40 mb-1 font-medium" style={fontStyle}>
+                        {t("contact.phone")}
                       </div>
                       <a
                         href={BUSINESS.phoneHref}
@@ -244,8 +245,8 @@ export default function ContactMain() {
                     </div>
 
                     <div>
-                      <div className="text-[11px] uppercase tracking-widest text-white/40 mb-1 font-medium">
-                        Email
+                      <div className="text-[11px] uppercase tracking-widest text-white/40 mb-1 font-medium" style={fontStyle}>
+                        {t("contact.email")}
                       </div>
                       <a
                         href={BUSINESS.emailHref}
@@ -262,9 +263,10 @@ export default function ContactMain() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn btn-primary w-full justify-center gap-2"
+                  style={fontStyle}
                 >
                   <ExternalLink size={16} />
-                  Open in Google Maps
+                  {isRTL ? "افتح في خرائط جوجل" : "Open in Google Maps"}
                 </a>
               </div>
 
@@ -297,15 +299,14 @@ export default function ContactMain() {
           <AnimatedSection>
             <div className="flex flex-col md:flex-row items-center justify-between gap-8">
               <div>
-                <p className="text-label text-gold-400 mb-2">
-                  Prefer a direct conversation?
+                <p className="text-label text-gold-400 mb-2" style={fontStyle}>
+                  {isRTL ? "تفضل تواصل مباشر؟" : "Prefer a direct conversation?"}
                 </p>
-                <h2 className="text-heading-2 text-white">
-                  Let&rsquo;s Talk Uniforms
+                <h2 className="text-heading-2 text-white" style={fontStyle}>
+                  {isRTL ? "دعنا نتحدث عن الزي الموحد" : "Let's Talk Uniforms"}
                 </h2>
-                <p className="text-white/50 text-sm mt-2 max-w-md">
-                  Our team is available Sunday to Thursday. Call us or send a
-                  WhatsApp message for instant assistance.
+                <p className="text-white/50 text-sm mt-2 max-w-md" style={fontStyle}>
+                  {isRTL ? "فريقنا متاح من الأحد إلى الخميس. اتصل بنا للحصول على مساعدة فورية." : "Our team is available Sunday to Thursday. Call us or send an email for instant assistance."}
                 </p>
               </div>
 
@@ -314,17 +315,19 @@ export default function ContactMain() {
                   href={BUSINESS.phoneHref}
                   id="contact-call-btn"
                   className="btn btn-primary gap-2.5 !px-8"
+                  style={fontStyle}
                 >
                   <Phone size={18} />
-                  Call Now
+                  {isRTL ? "اتصل الآن" : "Call Now"}
                 </a>
                 <a
                   href={BUSINESS.emailHref}
                   id="contact-email-btn"
                   className="btn btn-secondary gap-2.5 !px-8"
+                  style={fontStyle}
                 >
                   <Mail size={18} />
-                  Email Us
+                  {t("nav.emailUs")}
                 </a>
               </div>
             </div>

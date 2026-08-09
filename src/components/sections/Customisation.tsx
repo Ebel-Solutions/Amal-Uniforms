@@ -3,10 +3,17 @@
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import Image from "next/image";
 import { ArrowRight, Paintbrush, Shirt } from "lucide-react";
+import { useLanguage } from "@/lib/LanguageContext";
 
 export default function Customisation() {
+  const { t, isRTL } = useLanguage();
+  const fontStyle = isRTL ? { fontFamily: "'Noto Sans Arabic', 'Segoe UI', sans-serif", textAlign: 'right' as const } : {};
+
   return (
-    <section className="section-padding bg-warm-50" aria-label="Customisation services">
+    <section
+      className="section-padding bg-warm-50"
+      aria-label="Customisation services"
+    >
       <div className="container-custom">
         <div className="relative rounded-2xl overflow-hidden">
           {/* Background Image */}
@@ -25,16 +32,14 @@ export default function Customisation() {
           <div className="relative z-10 px-8 py-16 md:px-12 md:py-20 lg:px-16 lg:py-24">
             <div className="max-w-2xl">
               <AnimatedSection>
-                <span className="text-label text-gold-400 mb-4 block">
-                  Customisation
+                <span className="text-label text-gold-400 mb-4 block" style={fontStyle}>
+                  {t("sections.customisation.label")}
                 </span>
-                <h2 className="text-heading-1 text-white mb-6">
-                  Your Brand, Perfectly Embroidered
+                <h2 className="text-heading-1 text-white mb-6" style={fontStyle}>
+                  {t("sections.customisation.title")}
                 </h2>
-                <p className="text-body-large text-white/70 mb-8 max-w-xl">
-                  From logo embroidery and screen printing to custom colour
-                  matching and bespoke design — we bring your brand identity to
-                  life on every garment.
+                <p className="text-body-large text-white/70 mb-8 max-w-xl" style={fontStyle}>
+                  {t("sections.customisation.subtitle")}
                 </p>
               </AnimatedSection>
 
@@ -45,11 +50,11 @@ export default function Customisation() {
                       <Paintbrush size={20} />
                     </div>
                     <div>
-                      <div className="text-sm font-medium text-white">
-                        Logo Embroidery
+                      <div className="text-sm font-medium text-white" style={fontStyle}>
+                        {t("services.logoEmbroidery.title")}
                       </div>
-                      <div className="text-xs text-white/50">
-                        Machine & hand stitching
+                      <div className="text-xs text-white/50" style={fontStyle}>
+                        {isRTL ? "تطريز آلي ويدوي" : "Machine & hand stitching"}
                       </div>
                     </div>
                   </div>
@@ -58,11 +63,11 @@ export default function Customisation() {
                       <Shirt size={20} />
                     </div>
                     <div>
-                      <div className="text-sm font-medium text-white">
-                        Custom Colours
+                      <div className="text-sm font-medium text-white" style={fontStyle}>
+                        {isRTL ? "الألوان المخصصة" : "Custom Colours"}
                       </div>
-                      <div className="text-xs text-white/50">
-                        Pantone matching
+                      <div className="text-xs text-white/50" style={fontStyle}>
+                        {isRTL ? "مطابقة بانتون" : "Pantone matching"}
                       </div>
                     </div>
                   </div>
@@ -73,11 +78,13 @@ export default function Customisation() {
                 <a
                   href="/#quote"
                   className="btn btn-primary group"
+                  style={fontStyle}
                 >
-                  Discuss Customisation
+                  {isRTL ? "ناقش التخصيص" : "Discuss Customisation"}
                   <ArrowRight
                     size={18}
                     className="transition-transform group-hover:translate-x-1"
+                    style={isRTL ? { transform: "rotate(180deg)" } : {}}
                   />
                 </a>
               </AnimatedSection>

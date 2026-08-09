@@ -1,6 +1,6 @@
 "use client";
 
-import { VALUE_PROPS } from "@/lib/constants";
+import { useLanguage } from "@/lib/LanguageContext";
 import SectionHeading from "@/components/ui/SectionHeading";
 import { StaggerContainer, StaggerItem } from "@/components/ui/AnimatedSection";
 import {
@@ -22,6 +22,19 @@ const iconMap: Record<string, React.ReactNode> = {
 };
 
 export default function WhyAmal() {
+  const { t, isRTL } = useLanguage();
+
+  const valueProps = [
+    { title: t("valueProps.saudiBasedManufacturing.title"), description: t("valueProps.saudiBasedManufacturing.description"), icon: "MapPin" },
+    { title: t("valueProps.premiumMaterials.title"), description: t("valueProps.premiumMaterials.description"), icon: "Gem" },
+    { title: t("valueProps.customBranding.title"), description: t("valueProps.customBranding.description"), icon: "Award" },
+    { title: t("valueProps.bulkOrderSpecialists.title"), description: t("valueProps.bulkOrderSpecialists.description"), icon: "BarChart3" },
+    { title: t("valueProps.fastTurnaround.title"), description: t("valueProps.fastTurnaround.description"), icon: "Clock" },
+    { title: t("valueProps.dedicatedAccountManager.title"), description: t("valueProps.dedicatedAccountManager.description"), icon: "UserCheck" },
+  ];
+
+  const fontStyle = isRTL ? { fontFamily: "'Noto Sans Arabic', 'Segoe UI', sans-serif", textAlign: 'right' as const } : {};
+
   return (
     <section
       id="why-amal"
@@ -42,23 +55,23 @@ export default function WhyAmal() {
 
       <div className="container-custom relative z-10">
         <SectionHeading
-          label="Why Choose Us"
-          title="The Amal Advantage"
-          subtitle="We combine Saudi-based manufacturing with premium materials and dedicated service to deliver uniforms that set your team apart."
+          label={t("sections.whyAmal.label")}
+          title={t("sections.whyAmal.title")}
+          subtitle={t("sections.whyAmal.subtitle")}
           light
         />
 
         <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-          {VALUE_PROPS.map((prop) => (
+          {valueProps.map((prop) => (
             <StaggerItem key={prop.title}>
               <div className="p-7 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition-all duration-300 group">
                 <div className="w-12 h-12 rounded-lg bg-gold-500/10 text-gold-400 flex items-center justify-center mb-5 group-hover:bg-gold-500/20 transition-colors">
                   {iconMap[prop.icon]}
                 </div>
-                <h3 className="font-display text-lg font-semibold text-white mb-2">
+                <h3 className="font-display text-lg font-semibold text-white mb-2" style={fontStyle}>
                   {prop.title}
                 </h3>
-                <p className="text-body text-white/55 leading-relaxed">
+                <p className="text-body text-white/55 leading-relaxed" style={fontStyle}>
                   {prop.description}
                 </p>
               </div>
