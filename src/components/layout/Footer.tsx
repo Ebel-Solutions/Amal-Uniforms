@@ -75,7 +75,7 @@ export default function Footer() {
               ))}
               <li>
                 <a
-                  href="/#quote"
+                  href="/contact#quote"
                   className="text-sm text-gold-400 hover:text-gold-300 transition-colors font-medium"
                 >
                   Request a Quote
@@ -92,7 +92,7 @@ export default function Footer() {
               competitive pricing on custom uniforms.
             </p>
             <a
-              href="/#quote"
+              href="/contact#quote"
               className="btn btn-primary !text-sm w-full sm:w-auto"
             >
               Request a Quote

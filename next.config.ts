@@ -1,6 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+
+  allowedDevOrigins: ["192.168.0.157"], // for development - elhan
+
   images: {
     formats: ["image/avif", "image/webp"],
     qualities: [75, 90],

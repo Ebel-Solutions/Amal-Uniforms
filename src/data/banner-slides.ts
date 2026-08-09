@@ -52,7 +52,7 @@ export const bannerSlides: BannerSlide[] = [
     subtitle: "Industrial Workwear",
     title: "Protection Meets Professionalism",
     buttonText: "Get a Quote",
-    buttonLink: "/#quote",
+    buttonLink: "/contact#quote",
     bgVideo: "/images/banner_videos/engineer.mp4",
   },
 ];
