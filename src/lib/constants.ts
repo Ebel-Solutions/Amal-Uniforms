@@ -18,6 +18,8 @@ export const BUSINESS = {
     country: "Kingdom of Saudi Arabia",
     full: "Malik Faisal Bin Abdul Aziz Street, Al Dheera, Riyadh, Kingdom of Saudi Arabia",
   },
+  mapsUrl: "https://www.google.com/maps/place/Amal+Uniforms/@24.6286336,46.7187667,19z/data=!4m6!3m5!1s0x3e2f05000827b5b3:0xc799bd52d71d008c!8m2!3d24.6286336!4d46.7187667",
+  embedMapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d539.1354411150041!2d46.71876670136348!3d24.628633636066827!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e2f05000827b5b3%3A0xc799bd52d71d008c!2sAmal%20Uniforms!5e0!3m2!1sen!2sus!4v1786264149015!5m2!1sen!2sus",
   url: "https://www.amaluniform.com",
 } as const;
 

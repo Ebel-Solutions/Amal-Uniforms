@@ -35,10 +35,15 @@ export default function Footer() {
                 <Mail size={16} className="shrink-0" />
                 {BUSINESS.email}
               </a>
-              <div className="flex items-start gap-3 text-sm text-white/60">
+              <a
+                href={BUSINESS.mapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-start gap-3 text-sm text-white/60 hover:text-gold-400 transition-colors"
+              >
                 <MapPin size={16} className="shrink-0 mt-0.5" />
                 <span>{BUSINESS.address.full}</span>
-              </div>
+              </a>
             </div>
           </div>
 

@@ -38,7 +38,7 @@ const CONTACT_ITEMS = [
     label: "Showroom",
     primary: BUSINESS.address.street,
     secondary: `${BUSINESS.address.area}, ${BUSINESS.address.city}`,
-    href: "https://maps.google.com/?q=Malik+Faisal+Bin+Abdul+Aziz+Street+Al+Dheera+Riyadh",
+    href: BUSINESS.mapsUrl,
   },
   {
     id: "hours",
@@ -258,7 +258,7 @@ export default function ContactMain() {
                 </div>
 
                 <a
-                  href="https://maps.google.com/?q=Malik+Faisal+Bin+Abdul+Aziz+Street+Al+Dheera+Riyadh+Saudi+Arabia"
+                  href={BUSINESS.mapsUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn btn-primary w-full justify-center gap-2"
@@ -273,7 +273,7 @@ export default function ContactMain() {
                 <iframe
                   id="store-map"
                   title="Amal Uniforms Showroom Location"
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3624.6898327700847!2d46.71476!3d24.68225!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e2f03090e254b77%3A0x9a6d1f92e6b8a8b7!2sMalik%20Faisal%20Bin%20Abdul%20Aziz%20Street%2C%20Al%20Dheera%2C%20Riyadh!5e0!3m2!1sen!2ssa!4v1690000000000"
+                  src={BUSINESS.embedMapUrl}
                   width="100%"
                   height="100%"
                   style={{ border: 0, display: "block", minHeight: "420px" }}

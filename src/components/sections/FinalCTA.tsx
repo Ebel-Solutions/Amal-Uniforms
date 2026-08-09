@@ -71,13 +71,18 @@ export default function FinalCTA() {
                       </div>
                     </a>
 
-                    <div className="flex items-start gap-4">
-                      <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center shrink-0">
+                    <a
+                      href={BUSINESS.mapsUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-start gap-4 group/addr"
+                    >
+                      <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center shrink-0 group-hover/addr:bg-gold-500/20 transition-colors">
                         <MapPin size={18} className="text-gold-400" />
                       </div>
                       <div>
                         <div className="text-small text-white/50 mb-0.5">Address</div>
-                        <div className="text-sm text-white/80">
+                        <div className="text-sm text-white/80 group-hover/addr:text-white transition-colors">
                           {BUSINESS.address.street}
                           <br />
                           {BUSINESS.address.area}, {BUSINESS.address.city}
@@ -85,7 +90,7 @@ export default function FinalCTA() {
                           {BUSINESS.address.country}
                         </div>
                       </div>
-                    </div>
+                    </a>
 
                     <div className="flex items-start gap-4">
                       <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center shrink-0">

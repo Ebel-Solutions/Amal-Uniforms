@@ -171,9 +171,6 @@ function CategorySection({ category, onImageClick }: CategorySectionProps) {
       <AnimatedSection className="mb-8">
         <div className="flex items-end justify-between gap-4 flex-wrap">
           <div>
-            <span className="text-label text-gold-600 block mb-2">
-              {category.label}
-            </span>
             <h2 className="text-heading-2 text-navy-950">{category.label}</h2>
             <div className="gold-line mt-3 mb-4" />
             <p className="text-body text-charcoal-light/65 max-w-xl">
