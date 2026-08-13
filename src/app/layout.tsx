@@ -3,6 +3,7 @@ import { Playfair_Display, Inter } from "next/font/google";
 import "./globals.css";
 import { BUSINESS } from "@/lib/constants";
 import { LanguageProvider } from "@/lib/LanguageContext";
+import WhatsAppButton from "@/components/ui/WhatsAppButton";
 
 const playfairDisplay = Playfair_Display({
   variable: "--font-display",
@@ -130,6 +131,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col antialiased" suppressHydrationWarning>
         <LanguageProvider>
           {children}
+          <WhatsAppButton />
         </LanguageProvider>
       </body>
     </html>

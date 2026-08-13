@@ -59,7 +59,7 @@ function SlideBackground({
             priority={isActive}
             quality={80}
             className="object-cover object-center"
-            sizes="100vw"
+            sizes="(max-width: 768px) 100vw, 0px"
           />
         </div>
       )}
@@ -89,7 +89,7 @@ function SlideBackground({
           className={`object-cover object-center${
             slide.bgImageMobile ? " hidden md:block" : ""
           }`}
-          sizes="100vw"
+          sizes={slide.bgImageMobile ? "(min-width: 768px) 100vw, 0px" : "100vw"}
         />
       )}
     </>

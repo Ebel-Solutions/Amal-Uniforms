@@ -18,7 +18,7 @@ export type LeadStatus =
   | "won"
   | "lost";
 
-export type LeadSource = "Website - Request Quote" | "WhatsApp";
+export type LeadSource = "Website - Request Quote";
 
 // ─── Lead Document Shape ──────────────────────────────────────────────────────
 

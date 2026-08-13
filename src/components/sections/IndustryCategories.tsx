@@ -99,6 +99,7 @@ export default function IndustryCategories() {
               key={industry.id}
               href={industry.href ?? "/#quote"}
               className="industry-card"
+              style={{ position: "relative", display: "block", height: "clamp(420px, 60vh, 680px)" }}
               aria-label={`${INDUSTRY_KEY_MAP[industry.id] ? t(INDUSTRY_KEY_MAP[industry.id] + ".title") : industry.title} uniforms`}
             >
               {/* Image */}

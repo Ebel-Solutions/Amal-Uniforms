@@ -152,22 +152,6 @@ export default function Header() {
 
           {/* Desktop CTA — extreme right (or left in RTL) */}
           <div className="hidden lg:flex items-center gap-3 justify-self-end self-center">
-            {/* Language Toggle Button */}
-            <button
-              onClick={toggleLanguage}
-              aria-label={language === "en" ? "Switch to Arabic" : "التبديل إلى الإنجليزية"}
-              title={language === "en" ? "Switch to Arabic" : "التبديل إلى الإنجليزية"}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-white/80 hover:text-white border border-white/20 hover:border-white/40 hover:bg-white/10 transition-all duration-200 text-[12px] font-medium"
-              style={{
-                fontFamily: language === "en"
-                  ? "'Noto Sans Arabic', 'Segoe UI', sans-serif"
-                  : undefined,
-              }}
-            >
-              <Globe size={13} />
-              <span>{language === "en" ? "عربي" : "English"}</span>
-            </button>
-
             <a
               href={BUSINESS.phoneHref}
               aria-label={`Call ${BUSINESS.phoneFormatted}`}

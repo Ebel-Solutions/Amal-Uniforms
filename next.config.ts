@@ -6,7 +6,7 @@ const nextConfig: NextConfig = {
 
   images: {
     formats: ["image/avif", "image/webp"],
-    qualities: [75, 90],
+    qualities: [75, 80, 90],
     deviceSizes: [320, 420, 640, 768, 1024, 1280, 1536, 1920, 2560],
     minimumCacheTTL: process.env.NODE_ENV === "development" ? 0 : 86400,
   },
