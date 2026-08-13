@@ -55,7 +55,7 @@ export default function FinalCTA() {
                       <div>
                         <div className="text-small text-white/50 mb-0.5" style={fontStyle}>{t("contact.phone")}</div>
                         <div className="text-sm font-medium group-hover:text-gold-400 transition-colors">
-                          {BUSINESS.phone}
+                          {BUSINESS.phoneFormatted}
                         </div>
                       </div>
                     </a>

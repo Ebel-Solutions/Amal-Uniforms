@@ -646,3 +646,73 @@ body {
   animation: galleryCardIn 0.5s var(--ease-out-expo) both;
   height: 100%;
 }
+
+/* ─── Home Gallery Strip ──────────────────────────────────────────────────── */
+
+/* Scrollable track — no scrollbar, full width */
+.gallery-strip-track {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  padding-block: 8px;
+  padding-inline: 0;
+  scroll-behavior: auto;        /* JS controls smoothness */
+  -ms-overflow-style: none;     /* IE / Edge */
+  scrollbar-width: none;        /* Firefox */
+  user-select: none;
+  -webkit-user-select: none;
+}
+.gallery-strip-track::-webkit-scrollbar { display: none; }
+
+/* Individual card */
+.gallery-strip-card {
+  position: relative;
+  flex: 0 0 300px;
+  height: 400px;
+  overflow: hidden;
+  border-radius: 6px;
+  display: block;
+  padding: 0;
+  border: none;
+  background: #111;
+}
+
+@media (max-width: 640px) {
+  .gallery-strip-card {
+    flex: 0 0 220px;
+    height: 300px;
+  }
+}
+
+/* Navigation arrows */
+.gallery-strip-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(0,0,0,0.15);
+  background: rgba(255,255,255,0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #111;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+}
+.gallery-strip-arrow:hover {
+  background: #111;
+  color: #fff;
+  border-color: #111;
+}
+.gallery-strip-arrow--left  { left: 16px; }
+.gallery-strip-arrow--right { right: 16px; }
+
+@media (max-width: 640px) {
+  .gallery-strip-arrow { display: none; }
+}

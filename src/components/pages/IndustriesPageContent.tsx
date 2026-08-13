@@ -6,6 +6,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import ServiceCtaBanner from "@/components/sections/ServiceCtaBanner";
 import { useLanguage } from "@/lib/LanguageContext";
+import { BUSINESS } from "@/lib/constants";
 import { industryCategories } from "@/data/industry-categories";
 import {
   ChevronRight,
@@ -524,7 +525,7 @@ export default function IndustriesPageContent() {
             },
             secondaryBtn: {
               text: t("nav.callUs"),
-              href: "tel:+966572429905",
+              href: BUSINESS.phoneHref,
             },
           }}
           primaryBtnClass="bg-amber-500 text-navy-950 hover:bg-amber-400 font-bold"

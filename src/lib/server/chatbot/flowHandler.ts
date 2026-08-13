@@ -290,7 +290,7 @@ export async function handleMessage(
       return {
         reply:
           "⚠️ We encountered an issue saving your enquiry. Please contact us directly:\n\n📞 " +
-          (process.env.COMPANY_PHONE ?? "+966 55 123 4567") +
+          (process.env.COMPANY_PHONE ?? "+966 572 429 905") +
           "\n📧 info@amaluniforms.com",
         nextState: FLOW_STATE.DONE,
       };

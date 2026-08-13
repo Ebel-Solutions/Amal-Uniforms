@@ -61,7 +61,7 @@ export default function Footer() {
                 className="flex items-center gap-3 text-sm text-white/60 hover:text-gold-400 transition-colors"
               >
                 <Phone size={16} className="shrink-0" />
-                {BUSINESS.phone}
+                {BUSINESS.phoneFormatted}
               </a>
               <a
                 href={BUSINESS.emailHref}

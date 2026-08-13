@@ -62,17 +62,35 @@ export default function Header() {
           className="flex lg:grid h-[72px] lg:h-20 w-full px-6 lg:px-10 justify-between lg:justify-normal items-center"
           style={{ gridTemplateColumns: "1fr auto 1fr" }}
         >
-          {/* Logo — extreme left (or right in RTL) */}
-          <a href="/" className="flex items-center gap-2 justify-self-start self-center">
-            <div className="flex flex-col">
-              <span className="font-display text-xl lg:text-2xl font-bold tracking-tight text-white">
-                AMAL
-              </span>
-              <span className="text-[10px] lg:text-xs tracking-[0.25em] uppercase text-gold-400">
-                UNIFORMS
-              </span>
-            </div>
-          </a>
+          {/* Logo & Language Switcher — left section */}
+          <div className="flex items-center gap-4 lg:gap-6 justify-self-start self-center">
+            <a href="/" className="flex items-center gap-2">
+              <div className="flex flex-col">
+                <span className="font-display text-xl lg:text-2xl font-bold tracking-tight text-white">
+                  AMAL
+                </span>
+                <span className="text-[10px] lg:text-xs tracking-[0.25em] uppercase text-gold-400">
+                  UNIFORMS
+                </span>
+              </div>
+            </a>
+
+            {/* Desktop Language Toggle Button */}
+            <button
+              onClick={toggleLanguage}
+              aria-label={language === "en" ? "Switch to Arabic" : "التبديل إلى الإنجليزية"}
+              title={language === "en" ? "Switch to Arabic" : "التبديل إلى الإنجليزية"}
+              className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-full text-white/80 hover:text-white border border-white/20 hover:border-white/40 hover:bg-white/10 transition-all duration-200 text-[12px] font-medium"
+              style={{
+                fontFamily: language === "en"
+                  ? "'Noto Sans Arabic', 'Segoe UI', sans-serif"
+                  : undefined,
+              }}
+            >
+              <Globe size={13} />
+              <span>{language === "en" ? "عربي" : "English"}</span>
+            </button>
+          </div>
 
           {/* Desktop Navigation — dead center of viewport */}
           <nav
@@ -155,22 +173,6 @@ export default function Header() {
 
           {/* Desktop CTA — extreme right (or left in RTL) */}
           <div className="hidden lg:flex items-center gap-3 justify-self-end self-center">
-            {/* Language Toggle Button */}
-            <button
-              onClick={toggleLanguage}
-              aria-label={language === "en" ? "Switch to Arabic" : "التبديل إلى الإنجليزية"}
-              title={language === "en" ? "Switch to Arabic" : "التبديل إلى الإنجليزية"}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-white/80 hover:text-white border border-white/20 hover:border-white/40 hover:bg-white/10 transition-all duration-200 text-[12px] font-medium"
-              style={{
-                fontFamily: language === "en"
-                  ? "'Noto Sans Arabic', 'Segoe UI', sans-serif"
-                  : undefined,
-              }}
-            >
-              <Globe size={13} />
-              <span>{language === "en" ? "عربي" : "English"}</span>
-            </button>
-
             <a
               href={BUSINESS.phoneHref}
               aria-label={`Call ${BUSINESS.phoneFormatted}`}

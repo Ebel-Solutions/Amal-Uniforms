@@ -3,6 +3,7 @@
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
 import { useLanguage } from "@/lib/LanguageContext";
+import { BUSINESS } from "@/lib/constants";
 
 // ─── Set this to your image or video filename in /public/ ─────────────────────
 //     e.g. HERO_IMAGE = "/images/contact-hero.jpg" or HERO_VIDEO = "/videos/contact-hero.mp4"
@@ -119,7 +120,7 @@ export default function ContactHero() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
             {[
               { icon: <Clock size={20} />, label: t("contact.responseTime"), value: t("contact.within24Hours") },
-              { icon: <Phone size={20} />, label: t("contact.phone"), value: "057 242 9905" },
+              { icon: <Phone size={20} />, label: t("contact.phone"), value: BUSINESS.phoneFormatted },
               { icon: <Mail size={20} />, label: t("contact.email"), value: "Info@amaluniform.com" },
               { icon: <MapPin size={20} />, label: isRTL ? "الموقع" : "Location", value: isRTL ? "الرياض، المملكة" : "Riyadh, KSA" },
             ].map((item) => (

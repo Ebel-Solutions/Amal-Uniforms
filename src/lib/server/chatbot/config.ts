@@ -10,7 +10,7 @@
 export const COMPANY = {
   name: "Amal Uniforms",
   tagline: "Premium Uniform Manufacturer — Saudi Arabia",
-  phone: "+966 55 123 4567",  // Update with real number
+  phone: "+966 572 429 905",
   email: "info@amaluniforms.com",
   website: "https://www.amaluniforms.com",
   location: "Riyadh, Saudi Arabia",
