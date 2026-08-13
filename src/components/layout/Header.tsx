@@ -64,14 +64,11 @@ export default function Header() {
         >
           {/* Logo — extreme left (or right in RTL) */}
           <a href="/" className="flex items-center gap-2 justify-self-start self-center">
-            <div className="flex flex-col">
-              <span className="font-display text-xl lg:text-2xl font-bold tracking-tight text-white">
-                AMAL
-              </span>
-              <span className="text-[10px] lg:text-xs tracking-[0.25em] uppercase text-gold-400">
-                UNIFORMS
-              </span>
-            </div>
+            <img
+              src="/images/logo/Amal%20Logo.png"
+              alt="Amal Uniforms Logo"
+              className="h-10 lg:h-12 w-auto object-contain invert"
+            />
           </a>
 
           {/* Desktop Navigation — dead center of viewport */}
@@ -126,8 +123,8 @@ export default function Header() {
                               item.children!.length > 25
                                 ? "repeat(4, max-content)"
                                 : item.children!.length > 10
-                                ? "repeat(2, max-content)"
-                                : "repeat(1, max-content)",
+                                  ? "repeat(2, max-content)"
+                                  : "repeat(1, max-content)",
                             gap: "2px 14px",
                           }}
                         >

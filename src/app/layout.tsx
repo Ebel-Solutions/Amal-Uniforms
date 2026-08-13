@@ -111,6 +111,7 @@ export default function RootLayout({
       lang="en"
       dir="ltr"
       className={`${playfairDisplay.variable} ${inter.variable} h-full`}
+      suppressHydrationWarning
     >
       <head>
         <script
@@ -126,7 +127,7 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;500;600;700&display=swap"
         />
       </head>
-      <body className="min-h-full flex flex-col antialiased">
+      <body className="min-h-full flex flex-col antialiased" suppressHydrationWarning>
         <LanguageProvider>
           {children}
         </LanguageProvider>

@@ -45,12 +45,11 @@ export default function Footer() {
           {/* Company Info */}
           <div className="lg:col-span-1">
             <div className="mb-6">
-              <span className="font-display text-2xl font-bold tracking-tight text-white">
-                AMAL
-              </span>
-              <span className="block text-xs tracking-[0.25em] uppercase text-gold-400">
-                UNIFORMS
-              </span>
+              <img
+                src="/images/logo/Amal%20Logo.png"
+                alt="Amal Uniforms Logo"
+                className="h-24 w-auto object-contain invert"
+              />
             </div>
             <p className="text-body text-white/60 mb-6 max-w-xs" style={fontStyle}>
               {t("footer.description")}
