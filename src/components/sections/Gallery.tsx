@@ -8,15 +8,15 @@ import { useLanguage } from "@/lib/LanguageContext";
 
 const GALLERY_IMAGES = [
   // Uniforms
-  { src: "/images/gallery/uniforms/u1.jpg",  label: "Corporate Uniform" },
-  { src: "/images/gallery/uniforms/u2.jpg",  label: "Healthcare Uniform" },
-  { src: "/images/gallery/uniforms/u3.jpg",  label: "Hospitality Uniform" },
-  { src: "/images/gallery/uniforms/u4.jpg",  label: "Industrial Workwear" },
-  { src: "/images/gallery/uniforms/u5.jpg",  label: "Security Uniform" },
-  { src: "/images/gallery/uniforms/u6.jpg",  label: "Education Uniform" },
-  { src: "/images/gallery/uniforms/u7.jpg",  label: "Corporate Uniform" },
-  { src: "/images/gallery/uniforms/u8.jpg",  label: "Healthcare Uniform" },
-  { src: "/images/gallery/uniforms/u9.jpg",  label: "Aviation Uniform" },
+  { src: "/images/gallery/uniforms/u1.jpg", label: "Corporate Uniform" },
+  { src: "/images/gallery/uniforms/u2.jpg", label: "Healthcare Uniform" },
+  { src: "/images/gallery/uniforms/u3.jpg", label: "Hospitality Uniform" },
+  { src: "/images/gallery/uniforms/u4.jpg", label: "Industrial Workwear" },
+  { src: "/images/gallery/uniforms/u5.jpg", label: "Security Uniform" },
+  { src: "/images/gallery/uniforms/u6.jpg", label: "Education Uniform" },
+  { src: "/images/gallery/uniforms/u7.jpg", label: "Corporate Uniform" },
+  { src: "/images/gallery/uniforms/u8.jpg", label: "Healthcare Uniform" },
+  { src: "/images/gallery/uniforms/u9.jpg", label: "Aviation Uniform" },
   { src: "/images/gallery/uniforms/u10.jpg", label: "Hospitality Uniform" },
   { src: "/images/gallery/uniforms/u11.jpg", label: "Construction Workwear" },
   { src: "/images/gallery/uniforms/u12.jpg", label: "Security Uniform" },
@@ -65,11 +65,11 @@ export default function Gallery() {
     ? { fontFamily: "'Noto Sans Arabic','Segoe UI',sans-serif", textAlign: "right" as const }
     : {};
 
-  const trackRef        = useRef<HTMLDivElement>(null);
-  const autoRef         = useRef<ReturnType<typeof setInterval> | null>(null);
-  const pausedRef       = useRef(false);
-  const draggingRef     = useRef(false);
-  const dragStartX      = useRef(0);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const autoRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const pausedRef = useRef(false);
+  const draggingRef = useRef(false);
+  const dragStartX = useRef(0);
   const dragStartScroll = useRef(0);
   const [dragging, setDragging] = useState(false);
 
@@ -79,8 +79,8 @@ export default function Gallery() {
   const loopCheck = useCallback(() => {
     const t = trackRef.current;
     if (!t) return;
-    if (t.scrollLeft >= HALF)      t.scrollLeft -= HALF;
-    else if (t.scrollLeft <= 0)    t.scrollLeft += HALF;
+    if (t.scrollLeft >= HALF) t.scrollLeft -= HALF;
+    else if (t.scrollLeft <= 0) t.scrollLeft += HALF;
   }, []);
 
   // Auto-scroll at ~75px/s (~1.2px per 16ms frame)
@@ -106,9 +106,9 @@ export default function Gallery() {
 
   // Mouse drag
   const onMouseDown = (e: React.MouseEvent) => {
-    draggingRef.current   = true;
-    pausedRef.current     = true;
-    dragStartX.current      = e.clientX;
+    draggingRef.current = true;
+    pausedRef.current = true;
+    dragStartX.current = e.clientX;
     dragStartScroll.current = trackRef.current?.scrollLeft ?? 0;
     setDragging(true);
   };
@@ -125,9 +125,9 @@ export default function Gallery() {
 
   // Touch
   const onTouchStart = (e: React.TouchEvent) => {
-    pausedRef.current       = true;
-    dragStartX.current        = e.touches[0].clientX;
-    dragStartScroll.current   = trackRef.current?.scrollLeft ?? 0;
+    pausedRef.current = true;
+    dragStartX.current = e.touches[0].clientX;
+    dragStartScroll.current = trackRef.current?.scrollLeft ?? 0;
   };
   const onTouchMove = (e: React.TouchEvent) => {
     if (!trackRef.current) return;
@@ -205,12 +205,6 @@ export default function Gallery() {
               {/* Zoom icon */}
               <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <ZoomIn size={26} className="text-white drop-shadow-lg" />
-              </div>
-              {/* Label */}
-              <div className="absolute bottom-0 left-0 right-0 px-3 py-2 bg-gradient-to-t from-black/70 to-transparent translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                <span className="text-white text-xs font-medium tracking-wide" style={fontStyle}>
-                  {img.label}
-                </span>
               </div>
             </button>
           ))}
