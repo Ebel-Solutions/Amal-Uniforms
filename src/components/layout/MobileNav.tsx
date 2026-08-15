@@ -124,7 +124,7 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
         {/* Header row */}
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "16px 24px", borderBottom: "1px solid rgba(255,255,255,0.1)", flexShrink: 0 }}>
           <a href="/" onClick={onClose} style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
-            <img src="/images/logo/Amal%20Logo.png" alt="Amal Uniforms Logo" className="h-10 w-auto object-contain invert" />
+            <img src="/images/logo/amal-logo.png" alt="Amal Uniforms Logo" className="h-10 w-auto object-contain invert" />
           </a>
           <button
             type="button"

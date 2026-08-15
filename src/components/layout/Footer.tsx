@@ -46,7 +46,7 @@ export default function Footer() {
           <div className="lg:col-span-1">
             <div className="mb-6">
               <img
-                src="/images/logo/Amal%20Logo.png"
+                src="/images/logo/amal-logo.png"
                 alt="Amal Uniforms Logo"
                 className="h-24 w-auto object-contain invert"
               />

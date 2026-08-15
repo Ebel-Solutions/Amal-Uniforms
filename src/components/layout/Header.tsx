@@ -65,7 +65,7 @@ export default function Header() {
           {/* Logo — extreme left (or right in RTL) */}
           <a href="/" className="flex items-center gap-2 justify-self-start self-center">
             <img
-              src="/images/logo/Amal%20Logo.png"
+              src="/images/logo/amal-logo.png"
               alt="Amal Uniforms Logo"
               className="h-10 lg:h-12 w-auto object-contain invert"
             />
