@@ -124,8 +124,7 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
         {/* Header row */}
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "16px 24px", borderBottom: "1px solid rgba(255,255,255,0.1)", flexShrink: 0 }}>
           <a href="/" onClick={onClose} style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
-            <span style={{ fontFamily: "var(--font-display, serif)", fontSize: "18px", fontWeight: 700, letterSpacing: "-0.02em", color: "#ffffff" }}>AMAL</span>
-            <span style={{ fontSize: "9px", letterSpacing: "0.25em", textTransform: "uppercase", color: "var(--color-gold-400, #c8a96e)" }}>UNIFORMS</span>
+            <img src="/images/logo/Amal%20Logo.png" alt="Amal Uniforms Logo" className="h-10 w-auto object-contain invert" />
           </a>
           <button
             type="button"
@@ -249,3 +248,6 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
 
   return createPortal(content, document.body);
 }
+
+
+
