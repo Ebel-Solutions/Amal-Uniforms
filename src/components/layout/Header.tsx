@@ -62,14 +62,39 @@ export default function Header() {
           className="flex lg:grid h-[72px] lg:h-20 w-full px-6 lg:px-10 justify-between lg:justify-normal items-center"
           style={{ gridTemplateColumns: "1fr auto 1fr" }}
         >
-          {/* Logo — extreme left (or right in RTL) */}
-          <a href="/" className="flex items-center gap-2 justify-self-start self-center">
-            <img
-              src="/images/logo/amal-logo.png"
-              alt="Amal Uniforms Logo"
-              className="h-10 lg:h-12 w-auto object-contain invert"
-            />
-          </a>
+          {/* Logo + Language Toggle — left column */}
+          <div className="flex items-center gap-3 justify-self-start self-center">
+            <a href="/" className="flex items-center gap-2">
+              <img
+                src="/images/logo/amal-logo.png"
+                alt="Amal Uniforms Logo"
+                className="h-10 lg:h-12 w-auto object-contain invert"
+              />
+            </a>
+            {/* Desktop Language Toggle */}
+            <button
+              onClick={toggleLanguage}
+              aria-label={language === "en" ? "Switch to Arabic" : "التبديل إلى الإنجليزية"}
+              className="hidden lg:flex items-center gap-1.5"
+              style={{
+                padding: "6px 12px",
+                borderRadius: "20px",
+                border: "1px solid rgba(255,255,255,0.2)",
+                background: "none",
+                color: "rgba(255,255,255,0.85)",
+                fontSize: "13px",
+                fontWeight: 600,
+                cursor: "pointer",
+                fontFamily:
+                  language === "en"
+                    ? "'Noto Sans Arabic', 'Segoe UI', sans-serif"
+                    : undefined,
+              }}
+            >
+              <Globe size={14} />
+              {language === "en" ? "عربي" : "EN"}
+            </button>
+          </div>
 
           {/* Desktop Navigation — dead center of viewport */}
           <nav
