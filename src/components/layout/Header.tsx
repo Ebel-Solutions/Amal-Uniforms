@@ -59,46 +59,49 @@ export default function Header() {
       >
         {/* Full-width nav row */}
         <div
-          className="flex lg:grid h-[72px] lg:h-20 w-full px-6 lg:px-10 justify-between lg:justify-normal items-center"
-          style={{ gridTemplateColumns: "1fr auto 1fr" }}
+          className="flex lg:grid h-[60px] lg:h-16 w-full px-4 lg:px-6 justify-between lg:justify-normal items-center"
+          style={{ gridTemplateColumns: "minmax(0, 1fr) auto minmax(0, 1fr)" }}
         >
           {/* Logo + Language Toggle — left column */}
-          <div className="flex items-center gap-3 justify-self-start self-center">
-            <a href="/" className="flex items-center gap-2">
+          <div className="flex items-center gap-2 justify-self-start self-center min-w-0 flex-shrink-0">
+            <a href="/" className="flex items-center gap-2 flex-shrink-0">
               <img
                 src="/images/logo/amal-logo.png"
                 alt="Amal Uniforms Logo"
-                className="h-10 lg:h-12 w-auto object-contain invert"
+                className="object-contain invert flex-shrink-0"
+                style={{ height: "clamp(28px, 3.5vw, 40px)", width: "auto", minWidth: "60px", maxWidth: "120px" }}
               />
             </a>
-            {/* Desktop Language Toggle */}
+            {/* Desktop Language Toggle — icon only at lg, with text at xl */}
             <button
               onClick={toggleLanguage}
               aria-label={language === "en" ? "Switch to Arabic" : "التبديل إلى الإنجليزية"}
-              className="hidden lg:flex items-center gap-1.5"
+              className="hidden lg:flex items-center gap-1 flex-shrink-0"
               style={{
-                padding: "6px 12px",
+                padding: "4px 8px",
                 borderRadius: "20px",
                 border: "1px solid rgba(255,255,255,0.2)",
                 background: "none",
                 color: "rgba(255,255,255,0.85)",
-                fontSize: "13px",
+                fontSize: "11px",
                 fontWeight: 600,
                 cursor: "pointer",
+                whiteSpace: "nowrap",
                 fontFamily:
                   language === "en"
                     ? "'Noto Sans Arabic', 'Segoe UI', sans-serif"
                     : undefined,
               }}
             >
-              <Globe size={14} />
+              <Globe size={12} />
               {language === "en" ? "عربي" : "EN"}
             </button>
           </div>
 
           {/* Desktop Navigation — dead center of viewport */}
           <nav
-            className="hidden lg:flex items-center gap-0.5 justify-self-center self-center"
+            className="hidden lg:flex items-center justify-self-center self-center"
+            style={{ gap: "1px" }}
             aria-label="Main navigation"
           >
             {NAV_ITEMS.map((item) => {
@@ -115,14 +118,14 @@ export default function Header() {
                 >
                   <a
                     href={item.href}
-                    className="flex items-center gap-1 px-2.5 xl:px-3 py-2 text-[13px] xl:text-[14px] font-medium text-white/90 hover:text-white hover:bg-white/10 rounded-md transition-colors duration-200 whitespace-nowrap"
+                    className="flex items-center gap-0.5 px-1.5 xl:px-2.5 py-1.5 text-[11px] xl:text-[13px] font-medium text-white/90 hover:text-white hover:bg-white/10 rounded-md transition-colors duration-200 whitespace-nowrap"
                     style={{ fontFamily: isRTL ? "'Noto Sans Arabic', 'Segoe UI', sans-serif" : undefined }}
                   >
                     {translatedLabel}
                     {hasChildren && (
                       <ChevronDown
-                        size={13}
-                        className={`transition-transform duration-200 ${activeDropdown === item.label ? "rotate-180" : ""}`}
+                        size={10}
+                        className={`transition-transform duration-200 flex-shrink-0 ${activeDropdown === item.label ? "rotate-180" : ""}`}
                       />
                     )}
                   </a>
@@ -175,22 +178,22 @@ export default function Header() {
             })}
           </nav>
 
-          {/* Desktop CTA — extreme right (or left in RTL) */}
-          <div className="hidden lg:flex items-center gap-3 justify-self-end self-center">
+          {/* Desktop CTA — extreme right */}
+          <div className="hidden lg:flex items-center gap-1.5 xl:gap-3 justify-self-end self-center flex-shrink-0">
             <a
               href={BUSINESS.phoneHref}
               aria-label={`Call ${BUSINESS.phoneFormatted}`}
               title={`Call ${BUSINESS.phoneFormatted}`}
-              className="p-2.5 rounded-full text-white/80 hover:text-white hover:bg-white/10 border border-white/20 transition-colors flex items-center justify-center"
+              className="p-1.5 xl:p-2.5 rounded-full text-white/80 hover:text-white hover:bg-white/10 border border-white/20 transition-colors flex items-center justify-center flex-shrink-0"
             >
-              <Phone size={16} />
+              <Phone size={13} />
             </a>
-            <a href="/contact#quote" className="btn btn-primary !py-2 !px-5 !text-sm whitespace-nowrap">
+            <a href="/contact#quote" className="btn btn-primary !py-1.5 !px-3 xl:!px-5 !text-[11px] xl:!text-sm whitespace-nowrap flex-shrink-0">
               {t("nav.requestQuote")}
             </a>
           </div>
 
-          {/* Mobile: Call icon & hamburger */}
+          {/* Mobile: hamburger */}
           <div
             className="flex lg:hidden items-center gap-2"
             style={{ position: "relative", zIndex: 9001 }}
