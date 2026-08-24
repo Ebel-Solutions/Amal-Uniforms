@@ -12,6 +12,7 @@ import Gallery from "@/components/sections/Gallery";
 import Testimonials from "@/components/sections/Testimonials";
 import FAQ from "@/components/sections/FAQ";
 import FinalCTA from "@/components/sections/FinalCTA";
+import MusicPlayer from "@/components/ui/MusicPlayer";
 
 export default function Home() {
   return (
@@ -32,6 +33,8 @@ export default function Home() {
         <FinalCTA />
       </main>
       <Footer />
+      {/* Fixed music player — home page only */}
+      <MusicPlayer />
     </>
   );
 }

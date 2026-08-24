@@ -952,9 +952,9 @@ export default function IndustryPageContent({ data }: { data: IndustryData }) {
     <div className="min-h-screen bg-slate-50 flex flex-col text-slate-900 font-sans">
       <Header />
 
-      <main className="flex-1 pt-18 lg:pt-20">
+      <main className="flex-1">
         {/* ── 1. Hero Section ────────────────────────────────────────────────── */}
-        <section className="relative overflow-hidden bg-slate-100 border-b border-slate-200/60 min-h-[380px] lg:min-h-[440px] flex items-center">
+        <section className="relative overflow-hidden bg-slate-100 border-b border-slate-200/60 min-h-[380px] lg:min-h-[440px] flex items-center pt-18 lg:pt-20">
           <div className="absolute inset-0 z-0">
             <Image
               src={hero.heroImage}
