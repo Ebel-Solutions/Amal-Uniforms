@@ -42,8 +42,8 @@ export const bannerSlides: BannerSlide[] = [
     id: 1,
     subtitle: "Corporate Uniform",
     title: "The Visual Language of Business",
-    buttonText: "Shop Now",
-    buttonLink: "/#products",
+    buttonText: "Explore Collection",
+    buttonLink: "/industries/corporate",
     bgVideo: "/images/banner_videos/suit.mp4",
     // ↓ Replace with your actual mobile image path inside /public
     bgImageMobile: "/images/banner/mobile/slide-1.png",
@@ -53,7 +53,7 @@ export const bannerSlides: BannerSlide[] = [
     subtitle: "Healthcare Uniform",
     title: "Dressed for Care, Built for Comfort",
     buttonText: "Explore Collection",
-    buttonLink: "/#products",
+    buttonLink: "/industries/healthcare",
     bgVideo: "/images/banner_videos/doctor.mp4",
     // ↓ Replace with your actual mobile image path inside /public
     bgImageMobile: "/images/banner/mobile/slide-2.png",
@@ -62,10 +62,32 @@ export const bannerSlides: BannerSlide[] = [
     id: 3,
     subtitle: "Industrial Workwear",
     title: "Protection Meets Professionalism",
-    buttonText: "Get a Quote",
-    buttonLink: "/contact#quote",
+    buttonText: "Explore Collection",
+    buttonLink: "/industries/industrial-safety",
     bgVideo: "/images/banner_videos/engineer.mp4",
     // ↓ Replace with your actual mobile image path inside /public
     bgImageMobile: "/images/banner/mobile/slide-3.png",
+  },
+  {
+    id: 4,
+    subtitle: "Hotel & Hospitality",
+    title: "Elegance That Defines Your Brand",
+    buttonText: "Explore Collection",
+    buttonLink: "/industries/hospitality",
+    // ↓ Replace with your actual hotel video path inside /public/images/banner_videos/
+    bgVideo: "/images/banner_videos/hotel.mp4",
+    // ↓ Replace with your actual mobile image path inside /public
+    bgImageMobile: "/images/banner/mobile/slide-4.png",
+  },
+  {
+    id: 5,
+    subtitle: "Salon & Beauty",
+    title: "Style That Speaks for Itself",
+    buttonText: "Get a Quote",
+    buttonLink: "/industries/retail-commercial",
+    // ↓ Replace with your actual salon video path inside /public/images/banner_videos/
+    bgVideo: "/images/banner_videos/salon.mp4",
+    // ↓ Replace with your actual mobile image path inside /public
+    bgImageMobile: "/images/banner/mobile/slide-5.png",
   },
 ];

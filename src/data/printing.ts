@@ -77,7 +77,7 @@ export const printingData = {
       { icon: "Palette", label: "Pantone Color Matching" },
       { icon: "ShieldCheck", label: "Wash-Fast Guaranteed" },
     ],
-    heroImage: "/images/printing/logo-screen-printing.png",
+    heroImage: "/images/printing/uniform-screen-printing.png",
   },
 
   // ── Section Header ────────────────────────────────────────────────────────────

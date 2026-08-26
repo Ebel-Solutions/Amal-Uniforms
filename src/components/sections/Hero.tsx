@@ -113,6 +113,16 @@ const SLIDE_TRANSLATIONS: Record<number, { subtitle: { en: string; ar: string };
     title: { en: "Protection Meets Professionalism", ar: "الحماية تلتقي بالاحترافية" },
     buttonText: { en: "Get a Quote", ar: "احصل على عرض سعر" },
   },
+  4: {
+    subtitle: { en: "Hotel & Hospitality", ar: "الفنادق والضيافة" },
+    title: { en: "Elegance That Defines Your Brand", ar: "الأناقة التي تعرّف علامتك التجارية" },
+    buttonText: { en: "Explore Collection", ar: "استعرض المجموعة" },
+  },
+  5: {
+    subtitle: { en: "Salon & Beauty", ar: "الصالون والتجميل" },
+    title: { en: "Style That Speaks for Itself", ar: "الأسلوب الذي يتحدث عن نفسه" },
+    buttonText: { en: "Get a Quote", ar: "احصل على عرض سعر" },
+  },
 };
 
 // ── Hero ───────────────────────────────────────────────────────────────────────

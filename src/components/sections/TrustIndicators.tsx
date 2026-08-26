@@ -3,7 +3,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
 import { useLanguage } from "@/lib/LanguageContext";
-import GooglePreferredBadge from "@/components/ui/GooglePreferredBadge";
 
 function AnimatedCounter({
   value,
@@ -94,16 +93,7 @@ export default function TrustIndicators() {
           ))}
         </motion.div>
 
-        {/* Google Preferred Sources badge */}
-        <motion.div
-          className="flex justify-center mt-8 pt-6 border-t border-white/10"
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-        >
-          <GooglePreferredBadge variant="dark" />
-        </motion.div>
+
       </div>
     </section>
   );
