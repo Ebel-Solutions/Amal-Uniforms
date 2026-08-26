@@ -56,13 +56,16 @@ export default function Footer() {
               {t("footer.description")}
             </p>
             <div className="space-y-3">
-              <a
-                href={BUSINESS.phoneHref}
-                className="flex items-center gap-3 text-sm text-white/60 hover:text-gold-400 transition-colors"
-              >
-                <Phone size={16} className="shrink-0" />
-                {BUSINESS.phoneFormatted}
-              </a>
+              {BUSINESS.phones.map((p) => (
+                <a
+                  key={p.href}
+                  href={p.href}
+                  className="flex items-center gap-3 text-sm text-white/60 hover:text-gold-400 transition-colors"
+                >
+                  <Phone size={16} className="shrink-0" />
+                  {p.formatted}
+                </a>
+              ))}
               <a
                 href={BUSINESS.emailHref}
                 className="flex items-center gap-3 text-sm text-white/60 hover:text-gold-400 transition-colors"

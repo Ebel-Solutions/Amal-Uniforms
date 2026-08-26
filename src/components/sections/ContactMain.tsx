@@ -26,9 +26,10 @@ export default function ContactMain() {
       id: "phone",
       icon: <Phone size={20} />,
       label: t("contact.phone"),
-      primary: BUSINESS.phoneFormatted,
+      primary: BUSINESS.phones.map((p) => p.formatted).join(" / "),
       secondary: isRTL ? "الأحد – الخميس، 8:00 صباحاً – 6:00 مساءً" : "Sun – Thu, 8:00 AM – 6:00 PM",
       href: BUSINESS.phoneHref,
+      phones: BUSINESS.phones,
     },
     {
       id: "email",
@@ -236,12 +237,15 @@ export default function ContactMain() {
                       <div className="text-[11px] uppercase tracking-widest text-white/40 mb-1 font-medium" style={fontStyle}>
                         {t("contact.phone")}
                       </div>
-                      <a
-                        href={BUSINESS.phoneHref}
-                        className="text-sm text-white hover:text-gold-400 transition-colors font-medium"
-                      >
-                        {BUSINESS.phoneFormatted}
-                      </a>
+                      {BUSINESS.phones.map((p) => (
+                        <a
+                          key={p.href}
+                          href={p.href}
+                          className="block text-sm text-white hover:text-gold-400 transition-colors font-medium"
+                        >
+                          {p.formatted}
+                        </a>
+                      ))}
                     </div>
 
                     <div>

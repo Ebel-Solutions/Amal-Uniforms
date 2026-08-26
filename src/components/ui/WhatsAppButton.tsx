@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 // WhatsApp number: +966 572 429 905  →  international format without + for wa.me link
 const WA_NUMBER = "966572429905";

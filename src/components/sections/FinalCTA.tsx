@@ -45,20 +45,24 @@ export default function FinalCTA() {
                   </h3>
 
                   <div className="space-y-5">
-                    <a
-                      href={BUSINESS.phoneHref}
-                      className="flex items-start gap-4 group"
-                    >
-                      <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center shrink-0 group-hover:bg-gold-500/20 transition-colors">
+                    {/* Phone numbers */}
+                    <div className="flex items-start gap-4">
+                      <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center shrink-0">
                         <Phone size={18} className="text-gold-400" />
                       </div>
-                      <div>
+                      <div className="space-y-1">
                         <div className="text-small text-white/50 mb-0.5" style={fontStyle}>{t("contact.phone")}</div>
-                        <div className="text-sm font-medium group-hover:text-gold-400 transition-colors">
-                          {BUSINESS.phoneFormatted}
-                        </div>
+                        {BUSINESS.phones.map((p) => (
+                          <a
+                            key={p.href}
+                            href={p.href}
+                            className="block text-sm font-medium hover:text-gold-400 transition-colors"
+                          >
+                            {p.formatted}
+                          </a>
+                        ))}
                       </div>
-                    </a>
+                    </div>
 
                     <a
                       href={BUSINESS.emailHref}

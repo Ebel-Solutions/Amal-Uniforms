@@ -120,7 +120,7 @@ export default function ContactHero() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
             {[
               { icon: <Clock size={20} />, label: t("contact.responseTime"), value: t("contact.within24Hours") },
-              { icon: <Phone size={20} />, label: t("contact.phone"), value: BUSINESS.phoneFormatted },
+              { icon: <Phone size={20} />, label: t("contact.phone"), value: BUSINESS.phones.map((p) => p.formatted).join(" | ") },
               { icon: <Mail size={20} />, label: t("contact.email"), value: "Info@amaluniform.com" },
               { icon: <MapPin size={20} />, label: isRTL ? "الموقع" : "Location", value: isRTL ? "الرياض، المملكة" : "Riyadh, KSA" },
             ].map((item) => (

@@ -85,13 +85,16 @@ export default function AboutCTA() {
 
             {/* Quick contact strip */}
             <div className="flex flex-wrap gap-6 pt-8 border-t border-white/10">
-              <a
-                href={BUSINESS.phoneHref}
-                className="flex items-center gap-2.5 text-sm text-white/50 hover:text-white/80 transition-colors"
-              >
-                <Phone size={15} />
-                {BUSINESS.phoneFormatted}
-              </a>
+              {BUSINESS.phones.map((p) => (
+                <a
+                  key={p.href}
+                  href={p.href}
+                  className="flex items-center gap-2.5 text-sm text-white/50 hover:text-white/80 transition-colors"
+                >
+                  <Phone size={15} />
+                  {p.formatted}
+                </a>
+              ))}
               <a
                 href={BUSINESS.emailHref}
                 className="flex items-center gap-2.5 text-sm text-white/50 hover:text-white/80 transition-colors"

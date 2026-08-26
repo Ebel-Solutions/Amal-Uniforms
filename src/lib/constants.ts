@@ -6,9 +6,18 @@ export const BUSINESS = {
   tagline: "Crafting Saudi Arabia's Finest Professional Uniforms",
   description:
     "Premium uniform manufacturer based in Riyadh, Saudi Arabia. We design, manufacture, and deliver custom professional uniforms for businesses across the Kingdom.",
-  phone: "+966 572 429 905",
-  phoneFormatted: "+966 572 429 905",
-  phoneHref: "tel:+966572429905",
+  phone: "+966 509 974 380",
+  phoneFormatted: "+966 509 974 380",
+  phoneHref: "tel:+966509974380",
+  phone2: "+966 572 625 597",
+  phone2Formatted: "+966 572 625 597",
+  phone2Href: "tel:+966572625597",
+  // All three numbers for display wherever multiple contacts are shown
+  phones: [
+    { label: "Sales", formatted: "+966 572 429 905", href: "tel:+966572429905" },
+    { label: "Sales", formatted: "+966 509 974 380", href: "tel:+966509974380" },
+    { label: "Support", formatted: "+966 572 625 597", href: "tel:+966572625597" },
+  ],
   email: "Info@amaluniform.com",
   emailHref: "mailto:Info@amaluniform.com",
   address: {
