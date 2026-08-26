@@ -4,19 +4,24 @@ import { useEffect, useRef, useState } from "react";
 
 export default function MusicPlayer() {
   const audioRef = useRef<HTMLAudioElement | null>(null);
-  const [muted, setMuted] = useState(true);
+  const [muted, setMuted] = useState(false); // optimistically unmuted
 
   // Initialise audio once on mount
   useEffect(() => {
     const audio = new Audio("/music/background.mp3");
     audio.loop = true;
     audio.volume = 0.5;
-    audio.muted = true; // start muted so autoplay policy is satisfied
+    audio.muted = false; // try to start with sound
     audioRef.current = audio;
 
-    // Try to start playing silently (autoplay-policy allows muted autoplay)
+    // Attempt autoplay with sound
     audio.play().catch(() => {
-      // Browser blocked even muted autoplay — we'll start on first interaction
+      // Browser blocked audible autoplay — fall back to muted
+      audio.muted = true;
+      setMuted(true);
+      audio.play().catch(() => {
+        // Fully blocked — user must click to start
+      });
     });
 
     return () => {
@@ -31,7 +36,6 @@ export default function MusicPlayer() {
 
     if (muted) {
       audio.muted = false;
-      // If play was blocked earlier, resume now that the user interacted
       audio.play().catch(() => {});
       setMuted(false);
     } else {
@@ -39,6 +43,9 @@ export default function MusicPlayer() {
       setMuted(true);
     }
   };
+
+  // Ring label — single copy, no duplication
+  const ringLabel = muted ? "UNMUTE THE MAGIC •" : "NOW PLAYING •";
 
   return (
     <button
@@ -58,7 +65,7 @@ export default function MusicPlayer() {
           </defs>
           <text className="music-ring-text">
             <textPath href="#music-text-circle" startOffset="0%">
-              UNMUTE THE MAGIC • UNMUTE THE MAGIC •&nbsp;
+              {ringLabel}
             </textPath>
           </text>
         </svg>

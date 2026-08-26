@@ -3,6 +3,7 @@
 import { BUSINESS, NAV_ITEMS, INDUSTRIES } from "@/lib/constants";
 import { Phone, Mail, MapPin } from "lucide-react";
 import { useLanguage } from "@/lib/LanguageContext";
+import GooglePreferredBadge from "@/components/ui/GooglePreferredBadge";
 
 const NAV_LABEL_MAP: Record<string, string> = {
   Home: "nav.home",
@@ -153,10 +154,11 @@ export default function Footer() {
 
       {/* Bottom Bar */}
       <div className="border-t border-white/10">
-        <div className="container-custom py-6 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="container-custom py-5 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-small text-white/40" style={fontStyle}>
             © {new Date().getFullYear()} {BUSINESS.registeredName}. {t("footer.allRightsReserved")}
           </p>
+          <GooglePreferredBadge />
           <div className="flex items-center gap-6">
             <a
               href="#"
