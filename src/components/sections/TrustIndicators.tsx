@@ -102,7 +102,7 @@ export default function TrustIndicators() {
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.4 }}
         >
-          <GooglePreferredBadge />
+          <GooglePreferredBadge variant="dark" />
         </motion.div>
       </div>
     </section>

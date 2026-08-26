@@ -158,7 +158,7 @@ export default function Footer() {
           <p className="text-small text-white/40" style={fontStyle}>
             © {new Date().getFullYear()} {BUSINESS.registeredName}. {t("footer.allRightsReserved")}
           </p>
-          <GooglePreferredBadge />
+          <GooglePreferredBadge variant="dark" />
           <div className="flex items-center gap-6">
             <a
               href="#"

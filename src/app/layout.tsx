@@ -4,6 +4,7 @@ import "./globals.css";
 import { BUSINESS } from "@/lib/constants";
 import { LanguageProvider } from "@/lib/LanguageContext";
 import WhatsAppButton from "@/components/ui/WhatsAppButton";
+import GoogleFAB from "@/components/ui/GoogleFAB";
 
 const playfairDisplay = Playfair_Display({
   variable: "--font-display",
@@ -132,6 +133,7 @@ export default function RootLayout({
         <LanguageProvider>
           {children}
           <WhatsAppButton />
+          <GoogleFAB />
         </LanguageProvider>
       </body>
     </html>
