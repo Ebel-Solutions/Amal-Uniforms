@@ -292,7 +292,32 @@ export const translations = {
         ar: "أخبرنا عن متطلبات الزي الموحد لديك وسيقوم فريقنا بإعداد عرض سعر تنافسي خلال 24 ساعة.",
       },
     },
+    clients: {
+      label: { en: "Trusted By", ar: "يثق بنا" },
+      title: { en: "Our Clients", ar: "عملاؤنا" },
+      subtitle: {
+        en: "Proud to serve leading brands across Saudi Arabia and the wider GCC region.",
+        ar: "نفخر بخدمة كبرى العلامات التجارية في المملكة العربية السعودية ومنطقة الخليج.",
+      },
+    },
   },
+
+  // ─── Client Names ─────────────────────────────────────────────────────────────
+  clients: {
+    naqel:        { en: "Naqel Express",          ar: "ناقل إكسبريس" },
+    noon:         { en: "Noon Online Shopping",   ar: "نون للتسوق الإلكتروني" },
+    goldenChicken:{ en: "Golden Chicken",         ar: "الدجاجة الذهبية" },
+    fonte:        { en: "Fonte KSA",              ar: "فونتي السعودية" },
+    tanmiah:      { en: "Tanmiah Chicken",        ar: "تنمية للدجاج" },
+    exa:          { en: "Exa Ceramics",           ar: "إكسا للسيراميك" },
+    altanfeethi:  { en: "ALTANFEETHI",            ar: "التنفيذي" },
+    initial:      { en: "Initial Saudi Group",    ar: "مجموعة إنيشال السعودية" },
+    sixFlags:     { en: "Six Flags Qiddiya City", ar: "سيكس فلاجز قدية سيتي" },
+    shell:        { en: "Shell Global",           ar: "شل العالمية" },
+    shellHyundai: { en: "Shell & Hyundai",        ar: "شل وهيونداي" },
+    gmc:          { en: "GMC KSA",                ar: "جي إم سي السعودية" },
+  },
+
 
   // ─── Industry Cards ───────────────────────────────────────────────────────────
   industryCards: {
