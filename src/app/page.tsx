@@ -5,6 +5,7 @@ import TrustIndicators from "@/components/sections/TrustIndicators";
 import IndustryCategories from "@/components/sections/IndustryCategories";
 import FeaturedServices from "@/components/sections/FeaturedServices";
 import ProductCollections from "@/components/sections/ProductCollections";
+import ClientsCarousel from "@/components/sections/ClientsCarousel";
 import ManufacturingProcess from "@/components/sections/ManufacturingProcess";
 import WhyAmal from "@/components/sections/WhyAmal";
 import Customisation from "@/components/sections/Customisation";
@@ -24,6 +25,7 @@ export default function Home() {
         <IndustryCategories />
         <FeaturedServices />
         <ProductCollections />
+        <ClientsCarousel />
         <ManufacturingProcess />
         <WhyAmal />
         <Customisation />

@@ -1000,3 +1000,140 @@ body {
     display: none;
   }
 }
+
+/* ─── Clients Carousel ─────────────────────────────────────────────────────── */
+@keyframes clients-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.clients-section {
+  padding-block: clamp(4rem, 8vw, 7rem);
+  background: #ffffff;
+  overflow: hidden;
+}
+
+.clients-header {
+  margin-bottom: clamp(2.5rem, 4vw, 4rem);
+}
+
+.clients-label {
+  display: block;
+  margin-bottom: 0.75rem;
+  color: var(--color-gold-600);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+.clients-title {
+  color: var(--color-navy-950);
+  margin-bottom: 1rem;
+}
+
+.clients-divider {
+  margin-bottom: 1.25rem;
+}
+
+.clients-subtitle {
+  max-width: 36rem;
+  margin-inline: auto;
+  color: rgba(26, 26, 46, 0.6);
+}
+
+/* Marquee container */
+.clients-marquee-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Left/right gradient fade */
+.clients-fade {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: clamp(60px, 10vw, 140px);
+  z-index: 10;
+  pointer-events: none;
+}
+.clients-fade--left  { left: 0;  background: linear-gradient(to right, #ffffff 0%, transparent 100%); }
+.clients-fade--right { right: 0; background: linear-gradient(to left,  #ffffff 0%, transparent 100%); }
+
+/* Scrolling track */
+.clients-marquee-track {
+  display: flex;
+  gap: clamp(1rem, 3vw, 2rem);
+  width: max-content;
+  padding-block: 1rem;
+  animation: clients-scroll 30s linear infinite;
+}
+
+.clients-marquee-track:hover {
+  animation-play-state: paused;
+}
+
+/* Individual card */
+.clients-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  min-width: 150px;
+  padding: 1.5rem 1.25rem;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: box-shadow 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+  cursor: default;
+  user-select: none;
+}
+
+.clients-card:hover {
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.1);
+  transform: translateY(-4px);
+  border-color: rgba(0, 0, 0, 0.15);
+}
+
+/* Logo image wrapper */
+.clients-logo-wrap {
+  position: relative;
+  width: 110px;
+  height: 60px;
+  flex-shrink: 0;
+}
+
+.clients-logo-img {
+  object-fit: contain;
+  filter: grayscale(40%);
+  transition: filter 0.3s ease;
+}
+
+.clients-card:hover .clients-logo-img {
+  filter: grayscale(0%);
+}
+
+/* Company name label */
+.clients-name {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.55);
+  text-align: center;
+  letter-spacing: 0.02em;
+  line-height: 1.3;
+  transition: color 0.3s ease;
+}
+
+.clients-card:hover .clients-name {
+  color: rgba(0, 0, 0, 0.85);
+}
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  .clients-marquee-track {
+    animation: none;
+  }
+}
