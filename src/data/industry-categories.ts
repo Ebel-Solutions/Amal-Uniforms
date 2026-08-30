@@ -50,7 +50,7 @@ export const industryCategories: IndustryCategory[] = [
     id: "security",
     title: "Security Uniform",
     description: "Authoritative uniforms that command respect and visibility",
-    image: "/images/industries/securitiess.png",
+    image: "/images/industries/security.png",
     href: "/industries/security",
   },
   {
@@ -92,7 +92,7 @@ export const industryCategories: IndustryCategory[] = [
     id: "construction",
     title: "Construction Uniform",
     description: "High-visibility and heavy-duty apparel for construction sites",
-    image: "/images/industries/construction.png",
+    image: "/images/industries/construction.jpg",
     href: "/industries/construction",
   },
   {
