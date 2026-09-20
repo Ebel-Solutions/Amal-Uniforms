@@ -38,19 +38,22 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
   }, []);
 
   // Lock scroll on both html + body (required for iOS Safari)
+  // NOTE: We only touch overflow-y here — setting overflow to "" (empty) would
+  // clear the overflow-x: hidden defined in globals.css, causing momentary
+  // horizontal scroll on mobile after the nav closes.
   useEffect(() => {
     if (!mounted) return;
     const html = document.documentElement;
     if (isOpen) {
-      html.style.overflow = "hidden";
-      document.body.style.overflow = "hidden";
+      html.style.overflowY = "hidden";
+      document.body.style.overflowY = "hidden";
     } else {
-      html.style.overflow = "";
-      document.body.style.overflow = "";
+      html.style.overflowY = "";
+      document.body.style.overflowY = "";
     }
     return () => {
-      html.style.overflow = "";
-      document.body.style.overflow = "";
+      html.style.overflowY = "";
+      document.body.style.overflowY = "";
     };
   }, [isOpen, mounted]);
 
