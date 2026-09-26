@@ -1,7 +1,5 @@
 "use client";
 
-import { BUSINESS } from "@/lib/constants";
-
 /** Official Google "G" multicolor SVG */
 function GoogleG() {
   return (
@@ -21,18 +19,21 @@ function GoogleG() {
   );
 }
 
+/** Google profile share URL for Amal Uniforms */
+const GOOGLE_PROFILE_URL = "https://share.google/B6XnR2VK6yNaXIgXy";
+
 /**
  * Floating "Find us on Google" action button.
  * Positioned fixed bottom-right, stacked above the WhatsApp FAB.
- * Clicking opens the Google Preferred Sources deep link for amaluniform.com.
+ * Clicking opens the Amal Uniforms Google profile.
  */
 export default function GoogleFAB() {
   return (
     <a
-      href={BUSINESS.preferredSourceUrl}
+      href={GOOGLE_PROFILE_URL}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label="Add Amal Uniforms as a Google Preferred Source"
+      aria-label="View Amal Uniforms on Google"
       className="google-fab group"
     >
       {/* Google G icon */}
@@ -43,8 +44,8 @@ export default function GoogleFAB() {
 
       {/* Hover tooltip */}
       <span className="google-fab__tooltip" aria-hidden="true">
-        <span className="google-fab__tooltip-title">Add as Preferred Source</span>
-        <span className="google-fab__tooltip-sub">See us first on Google</span>
+        <span className="google-fab__tooltip-title">Find us on Google</span>
+        <span className="google-fab__tooltip-sub">View our Google profile</span>
       </span>
     </a>
   );

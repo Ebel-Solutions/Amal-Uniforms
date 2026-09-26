@@ -13,18 +13,18 @@ export default function ClientsCarousel() {
   // ─── Client Data ─────────────────────────────────────────────────────────────
   // Drop logo files into /public/images/clients/ matching the `logo` filenames.
   const clients = [
-    { id: "naqel",         name: t("clients.naqel"),         logo: "/images/clients/naqel.png" },
-    { id: "noon",          name: t("clients.noon"),          logo: "/images/clients/noon.png" },
+    { id: "naqel", name: t("clients.naqel"), logo: "/images/clients/naqel.png" },
+    { id: "noon", name: t("clients.noon"), logo: "/images/clients/noon.png" },
     { id: "goldenChicken", name: t("clients.goldenChicken"), logo: "/images/clients/golden-chicken.png" },
-    { id: "fonte",         name: t("clients.fonte"),         logo: "/images/clients/fonte.png" },
-    { id: "tanmiah",       name: t("clients.tanmiah"),       logo: "/images/clients/tanmiah.png" },
-    { id: "exa",           name: t("clients.exa"),           logo: "/images/clients/exa.png" },
-    { id: "altanfeethi",   name: t("clients.altanfeethi"),   logo: "/images/clients/altanfeethi.png" },
-    { id: "initial",       name: t("clients.initial"),       logo: "/images/clients/initial-saudi.png" },
-    { id: "sixFlags",      name: t("clients.sixFlags"),      logo: "/images/clients/six-flags.png" },
-    { id: "shell",         name: t("clients.shell"),         logo: "/images/clients/shell.png" },
-    { id: "shellHyundai",  name: t("clients.shellHyundai"),  logo: "/images/clients/shell-hyundai.png" },
-    { id: "gmc",           name: t("clients.gmc"),           logo: "/images/clients/gmc.png" },
+    { id: "fonte", name: t("clients.fonte"), logo: "/images/clients/fonte.png" },
+    { id: "tanmiah", name: t("clients.tanmiah"), logo: "/images/clients/tanmiah.png" },
+    { id: "exa", name: t("clients.exa"), logo: "/images/clients/exa.png" },
+    { id: "altanfeethi", name: t("clients.altanfeethi"), logo: "/images/clients/altanfeethi.png" },
+    { id: "initial", name: t("clients.initial"), logo: "/images/clients/initial-saudi.png" },
+    { id: "sixFlags", name: t("clients.sixFlags"), logo: "/images/clients/six-flags.png" },
+    { id: "shell", name: t("clients.shell"), logo: "/images/clients/shell.png" },
+    { id: "shellHyundai", name: t("clients.shellHyundai"), logo: "/images/clients/shell-hyundai.png" },
+    { id: "gmc", name: t("clients.gmc"), logo: "/images/clients/gmc.png" },
   ];
 
   // Duplicate for seamless infinite loop
@@ -41,7 +41,7 @@ export default function ClientsCarousel() {
         <span className="text-label clients-label" style={fontStyle}>
           {t("sections.clients.label")}
         </span>
-        <h2 className="text-heading-2 clients-title" style={fontStyle}>
+        <h2 className="text-heading-1 clients-title" style={fontStyle}>
           {t("sections.clients.title")}
         </h2>
         <div className="gold-line gold-line-center clients-divider" />
