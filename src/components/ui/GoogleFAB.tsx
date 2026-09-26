@@ -1,5 +1,7 @@
 "use client";
 
+import { useLanguage } from "@/lib/LanguageContext";
+
 /** Official Google "G" multicolor SVG */
 function GoogleG() {
   return (
@@ -28,12 +30,14 @@ const GOOGLE_PROFILE_URL = "https://share.google/B6XnR2VK6yNaXIgXy";
  * Clicking opens the Amal Uniforms Google profile.
  */
 export default function GoogleFAB() {
+  const { isRTL } = useLanguage();
+
   return (
     <a
       href={GOOGLE_PROFILE_URL}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label="View Amal Uniforms on Google"
+      aria-label={isRTL ? "عرض أمال للزي الموحد على جوجل" : "View Amal Uniforms on Google"}
       className="google-fab group"
     >
       {/* Google G icon */}
@@ -44,8 +48,12 @@ export default function GoogleFAB() {
 
       {/* Hover tooltip */}
       <span className="google-fab__tooltip" aria-hidden="true">
-        <span className="google-fab__tooltip-title">Find us on Google</span>
-        <span className="google-fab__tooltip-sub">View our Google profile</span>
+        <span className="google-fab__tooltip-title">
+          {isRTL ? "ابحث عنا على جوجل" : "Find us on Google"}
+        </span>
+        <span className="google-fab__tooltip-sub">
+          {isRTL ? "عرض ملفنا التعريفي" : "View our Google profile"}
+        </span>
       </span>
     </a>
   );

@@ -3,6 +3,7 @@
 import Script from "next/script";
 import { motion } from "framer-motion";
 import { BUSINESS } from "@/lib/constants";
+import { useLanguage } from "@/lib/LanguageContext";
 
 /** Official Google "G" multicolor SVG */
 function GoogleG({ size = 20 }: { size?: number }) {
@@ -42,6 +43,7 @@ export default function GooglePreferredBadge({
   className = "",
 }: GooglePreferredBadgeProps) {
   const isDark = variant === "dark";
+  const { isRTL } = useLanguage();
 
   return (
     <>
@@ -66,7 +68,7 @@ export default function GooglePreferredBadge({
           href={BUSINESS.preferredSourceUrl}
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="Add Amal Uniforms as a Google Preferred Source"
+          aria-label={isRTL ? "أضف أمال للزي الموحد كمصدر مفضل على جوجل" : "Add Amal Uniforms as a Google Preferred Source"}
           whileHover={{ scale: 1.03 }}
           whileTap={{ scale: 0.97 }}
           className={[
@@ -78,12 +80,12 @@ export default function GooglePreferredBadge({
         >
           <GoogleG size={20} />
 
-          <div className="flex flex-col leading-tight">
+          <div className={["flex flex-col leading-tight", isRTL ? "text-right" : ""].join(" ")}>
             <span className={["font-semibold text-xs tracking-wide", isDark ? "text-white/90" : "text-gray-800"].join(" ")}>
-              Add as Preferred Source
+              {isRTL ? "أضف كمصدر مفضل" : "Add as Preferred Source"}
             </span>
             <span className={["text-[10px] mt-0.5", isDark ? "text-white/45" : "text-gray-400"].join(" ")}>
-              See us first on Google
+              {isRTL ? "شاهدنا أولاً على جوجل" : "See us first on Google"}
             </span>
           </div>
 
