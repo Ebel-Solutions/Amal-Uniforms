@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Inter } from "next/font/google";
+import "lenis/dist/lenis.css";
 import "./globals.css";
 import { BUSINESS } from "@/lib/constants";
 import { LanguageProvider } from "@/lib/LanguageContext";
+import SmoothScrollProvider from "@/components/providers/SmoothScrollProvider";
 import WhatsAppButton from "@/components/ui/WhatsAppButton";
 import GoogleFAB from "@/components/ui/GoogleFAB";
 
@@ -130,11 +132,13 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col antialiased" suppressHydrationWarning>
-        <LanguageProvider>
-          {children}
-          <WhatsAppButton />
-          <GoogleFAB />
-        </LanguageProvider>
+        <SmoothScrollProvider>
+          <LanguageProvider>
+            {children}
+            <WhatsAppButton />
+            <GoogleFAB />
+          </LanguageProvider>
+        </SmoothScrollProvider>
       </body>
     </html>
   );

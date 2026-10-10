@@ -142,6 +142,7 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
 
         {/* Nav links */}
         <nav
+          data-lenis-prevent
           style={{ flex: 1, overflowY: "auto", padding: "8px 24px", WebkitOverflowScrolling: "touch" }}
           aria-label="Mobile navigation"
         >

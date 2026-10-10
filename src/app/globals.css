@@ -69,10 +69,18 @@
 }
 
 html {
-  scroll-behavior: smooth;
   scroll-padding-top: var(--header-height);
   -webkit-text-size-adjust: 100%;
   overflow-x: hidden;
+}
+
+/* Fallback native smooth scroll when Lenis is not active */
+html:not(.lenis) {
+  scroll-behavior: smooth;
+}
+
+html.lenis {
+  scroll-behavior: auto !important;
 }
 
 body {
